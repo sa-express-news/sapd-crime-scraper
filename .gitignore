@@ -1,0 +1,11 @@
+# dependencies
+/node_modules
+
+#production
+/build
+
+#npm error log
+npm-debug.log*
+
+#environment variables
+.env

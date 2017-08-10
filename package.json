@@ -1,0 +1,26 @@
+{
+  "name": "sapd-crime-scraper",
+  "version": "0.0.1",
+  "description": "Scrapes crime data from the San Antonio Police Department website",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "tsc",
+    "test": "mocha ./build/**/*_spec.js"
+  },
+  "keywords": [
+    "San",
+    "Antonio",
+    "crime",
+    "scrapers"
+  ],
+  "author": "Kia Farhang",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.0.2",
+    "@types/chai-as-promised": "0.0.31",
+    "@types/mocha": "^2.2.41",
+    "chai": "^4.1.1",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^3.5.0"
+  }
+}
