@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "pretest": "tsc",
-    "test": "mocha ./build/**/*_spec.js"
+    "test": "mocha ./build/**/spec.js",
+    "prestart": "tsc",
+    "start": "node build/index.js"
   },
   "keywords": [
     "San",
@@ -22,5 +24,18 @@
     "chai": "^4.1.1",
     "chai-as-promised": "^7.1.1",
     "mocha": "^3.5.0"
+  },
+  "dependencies": {
+    "@types/dotenv": "^4.0.0",
+    "@types/jsdom": "^11.0.1",
+    "@types/pg": "^6.1.43",
+    "@types/request-promise-native": "^1.0.6",
+    "@types/sequelize": "^4.0.69",
+    "dotenv": "^4.0.0",
+    "jsdom": "^11.1.0",
+    "pg": "^7.1.2",
+    "pg-hstore": "^2.3.2",
+    "request-promise-native": "^1.0.4",
+    "sequelize": "^4.5.0"
   }
 }
