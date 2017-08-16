@@ -24,18 +24,18 @@ export class Call{
 		this.zipcode = callData.zipcode;
 	}
 
-	public async addToDb(sequelize: any): Promise<boolean>{
+	public async addToDb(): Promise<boolean>{
 		try {
 			 const add = await CallModel.create({
-				incidentNumber: '10065814',
-				category: 'Property Crime Calls',
-				problemType: 'Theft in Progress',
-				responseDate: new Date(),
-				address: '1300 Callaghan Rd',
-				hoa: '',
-				schoolDistrict: 'Northside ISD',
-				councilDistrict: 6,
-				zipcode: 78228
+				incidentNumber: this.incidentNumber,
+				category: this.category,
+				problemType: this.problemType,
+				responseDate: this.responseDate,
+				address: this.address,
+				hoa: this.hoa,
+				schoolDistrict: this.schoolDistrict,
+				councilDistrict: this.councilDistrict,
+				zipcode: this.zipcode
 			});
 
 			return true;			
@@ -44,9 +44,4 @@ export class Call{
 			return false;
 		}
 	}
-
-	// public get(): Call{
-	// 	const object = {incidentNumber, category, problemType, responseDate, address, hoa, schoolDistrict, councilDistrict, zipcode} = this;
-	// }
-
 }

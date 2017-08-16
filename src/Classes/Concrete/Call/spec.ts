@@ -1,40 +1,23 @@
 import { Call } from './index';
 import { CallData } from '../../../Interfaces/Call';
-import { sequelize } from '../../../index';
+import { CallModel } from '../../../index';
 import * as chai from 'chai';
 import 'mocha';
-
 const assert = chai.assert;
 
-// describe('Call', ()=>{
-// 	describe('Methods', ()=>{
-// 		// describe('get', ()=>{
-// 		// 	// it('should return the call', ()=>{
-// 		// 	// 	const dummyCall = {
-// 		// 	// 		incidentNumber: '10065814',
-// 		// 	// 		category: 'Property Crime Calls',
-// 		// 	// 		problemType: 'Theft in Progress',
-// 		// 	// 		responseDate: new Date(),
-// 		// 	// 		address: '1300 Callaghan Rd',
-// 		// 	// 		hoa: '',
-// 		// 	// 		schoolDistrict: 'Northside ISD',
-// 		// 	// 		councilDistrict: 6,
-// 		// 	// 		zipcode: 78228
-// 		// 	// 	};
-
-// 		// 	// 	const call = new Call(dummyCall);
-
-// 		// 	// 	const response = call.
-
-// 		// 	});
-// 		// });
+describe('Call', ()=>{
+	describe('Methods', ()=>{
 		describe('addToDb', ()=>{
-			// before(()=>{
+			afterEach(()=>{
+				CallModel.destroy({ where: {incidentNumber: 'calltest'}})
+					.then(testCall =>{
 
-			// })
-			it('should add the call to the DB', async ()=>{
+					})
+			});
+
+			it('should add the call to the DB', async()=>{
 				const dummyCall = {
-					incidentNumber: '1',
+					incidentNumber: 'calltest',
 					category: 'Property Crime Calls',
 					problemType: 'Theft in Progress',
 					responseDate: new Date(),
@@ -47,12 +30,55 @@ const assert = chai.assert;
 
 				const call = new Call(dummyCall);
 
+				const add = await call.addToDb();
 
-				const add = await call.addToDb(sequelize);
-
-				assert.isTrue(add);
+				CallModel.findOne({where: {incidentNumber: 'calltest'}})
+					.then(testCall =>{
+						assert.isDefined(testCall);
+					});
 
 			});
-// 		})
-// 	});
+
+			it('should return true if the add is successful', async ()=>{
+				const dummyCall = {
+					incidentNumber: 'calltest',
+					category: 'Property Crime Calls',
+					problemType: 'Theft in Progress',
+					responseDate: new Date(),
+					address: '1300 Callaghan Rd',
+					hoa: '',
+					schoolDistrict: 'Northside ISD',
+					councilDistrict: 6,
+					zipcode: 78228
+				};
+
+				const call = new Call(dummyCall);
+
+				const add = await call.addToDb();
+
+				assert.isTrue(add);
+			});
+		});
+	});
 });
+		// describe('get', ()=>{
+		// 	// it('should return the call', ()=>{
+		// 	// 	const dummyCall = {
+		// 	// 		incidentNumber: '10065814',
+		// 	// 		category: 'Property Crime Calls',
+		// 	// 		problemType: 'Theft in Progress',
+		// 	// 		responseDate: new Date(),
+		// 	// 		address: '1300 Callaghan Rd',
+		// 	// 		hoa: '',
+		// 	// 		schoolDistrict: 'Northside ISD',
+		// 	// 		councilDistrict: 6,
+		// 	// 		zipcode: 78228
+		// 	// 	};
+
+		// 	// 	const call = new Call(dummyCall);
+
+		// 	// 	const response = call.
+
+		// 	});
+		// });
+
