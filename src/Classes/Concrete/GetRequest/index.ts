@@ -24,8 +24,4 @@ export class GetRequest{
 	public getCookieJar(): object{
 		return this.cookieJar;
 	}
-
-	public setCookieJar(jar: object): void{
-		this.cookieJar = jar;
-	}
 }
