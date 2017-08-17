@@ -21,9 +21,11 @@
     "@types/chai": "^4.0.2",
     "@types/chai-as-promised": "0.0.31",
     "@types/mocha": "^2.2.41",
+    "@types/sinon": "^2.3.3",
     "chai": "^4.1.1",
     "chai-as-promised": "^7.1.1",
-    "mocha": "^3.5.0"
+    "mocha": "^3.5.0",
+    "sinon": "^3.2.1"
   },
   "dependencies": {
     "@types/dotenv": "^4.0.0",
@@ -33,7 +35,7 @@
     "@types/sequelize": "^4.0.69",
     "dotenv": "^4.0.0",
     "jsdom": "^11.1.0",
-    "pg": "^7.1.2",
+    "pg": "6.4.1",
     "pg-hstore": "^2.3.2",
     "request-promise-native": "^1.0.4",
     "sequelize": "^4.5.0"
