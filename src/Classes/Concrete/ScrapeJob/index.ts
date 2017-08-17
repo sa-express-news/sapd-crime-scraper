@@ -3,6 +3,9 @@ import { Bag } from '../Bag';
 import { GetRequest } from '../GetRequest';
 import { PostRequest } from '../PostRequest';
 
+import { CallModel } from '../../../index';
+
+import { CallData } from '../../../Interfaces/Call';
 import { SAPDFormParams } from '../../../Interfaces/SAPDFormParams';
 import { PostRequestParams } from '../../../Interfaces/PostRequestParams';
 
@@ -20,9 +23,9 @@ export class ScrapeJob{
 			__VIEWSTATE: '',
 			__VIEWSTATEGENERATOR: '',
 			__EVENTVALIDATION: '',
-			txtStart: '',
+			txtStart: day,
 			rdbSearchRange: 'day',
-			txtEndDate: '06/07/2017',
+			txtEndDate: day,
 			txtZipcode: '',
 			ddlCategory: 'ALL ',
 			ddlCouncilDistrict: '1',
@@ -35,18 +38,55 @@ export class ScrapeJob{
 		this.calls = new Bag<Call>();
 	}
 
-	public async run(): Promise<void>{
+	public async run(): Promise<void|Error>{
 
-		process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-		this.config.txtStart = '06/07/2017';
-		// this.config.ddlSchoolDistrict = 'Alamo Heights ISD';
+		try{
+		
+			// process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+			// this.config.ddlCouncilDistrict = '1';
+			// this.config.ddlSchoolDistrict = 'Alamo Heights ISD';
 
-		const getRequest = new GetRequest();
-		const firstPage = await getRequest.get('https://webapp3.sanantonio.gov/policecalls/Reports.aspx');
+			const getRequest: GetRequest = new GetRequest();
+			const firstPage: Document = await getRequest.get('https://webapp3.sanantonio.gov/policecalls/Reports.aspx');
 
-		this.collectAndSetSessionState(firstPage);
+			this.collectAndSetSessionState(firstPage);
 
-		const postParams: PostRequestParams = {
+			const postParams: PostRequestParams = this.buildPostParams(getRequest);
+
+			const postRequest = new PostRequest(postParams);
+
+			const posted = await postRequest.post();
+
+			const secondPage = await getRequest.get('https://webapp3.sanantonio.gov/policecalls/Results.aspx');
+
+			this.scrapeCalls(secondPage);		
+		}
+		catch(e){
+			return e;
+		}
+	}
+
+	public async DatabaseAllCalls(): Promise<void|Error>{
+		try{
+			for (let call of this.calls){
+				let a = await call.addToDb();
+			}			
+		}
+		catch(e){
+			return e;
+		}
+	}
+
+	public async WriteCallsToCSV(): Promise<void>{
+		
+	}
+
+	public getCalls(): Bag<Call>{
+		return this.calls;
+	}
+
+	private buildPostParams(getRequest: GetRequest): PostRequestParams{
+		return {
 			method: 'POST',
 			uri: 'https://webapp3.sanantonio.gov/policecalls/Reports.aspx',
 			form: this.config,
@@ -54,28 +94,16 @@ export class ScrapeJob{
 			headers: {
 				'Host': 'webapp3.sanantonio.gov',
 				'Origin': 'https://webapp3.sanantonio.gov',
-				'Referer': 'https://webapp3.sanantonio.gov/policecalls/Reports.aspx'
-				// 'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.39 Safari/537.36'
+				'Referer': 'https://webapp3.sanantonio.gov/policecalls/Reports.aspx',
+				'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'
 			}
 		};
-
-		const postRequest = new PostRequest(postParams);
-
-		const posted = await postRequest.post();
-
-		const secondPage = await getRequest.get('https://webapp3.sanantonio.gov/policecalls/Results.aspx');
-
-		const body = secondPage.body;
-
-		console.log(body);
-
 	}
 
 	private collectAndSetSessionState(page: Document): void{
 		const viewStateInput = <HTMLInputElement>page.getElementById('__VIEWSTATE');
 		const viewState: string = viewStateInput.value;
 		this.config.__VIEWSTATE = viewState;
-		console.log(viewState);
 
 		const viewStateGeneratorInput = <HTMLInputElement>page.getElementById('__VIEWSTATEGENERATOR');
 		const viewStateGenerator: string = viewStateGeneratorInput.value;
@@ -86,5 +114,30 @@ export class ScrapeJob{
 		this.config.__EVENTVALIDATION = eventValidation;
 	}
 
-	private manipulateForm
+	private scrapeCalls(page: Document): void{
+
+		const table = page.getElementById('gvCFS');
+		const rows = Array.from(table.getElementsByTagName('tr'));
+		//We splice the first element because it's just the column headers
+		rows.splice(0,1);
+
+		rows.forEach((tr: HTMLTableRowElement)=>{
+			const tableData: string[] = Array.from(tr.getElementsByTagName('td')).map(td=>{return td.textContent});
+
+
+			const callInfo: CallData = {
+				incidentNumber: tableData[0],
+				category: tableData[1],
+				problemType: tableData[2],
+				responseDate: new Date(tableData[3]),
+				address: tableData[4],
+				hoa: tableData[5],
+				schoolDistrict: tableData[6],
+				councilDistrict: parseInt(tableData[7]),
+				zipcode: parseInt(tableData[8])
+			};
+
+			this.calls.add(new Call(callInfo));
+		});
+	}
 }
