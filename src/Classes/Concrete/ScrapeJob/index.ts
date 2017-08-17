@@ -9,6 +9,9 @@ import { CallData } from '../../../Interfaces/Call';
 import { SAPDFormParams } from '../../../Interfaces/SAPDFormParams';
 import { PostRequestParams } from '../../../Interfaces/PostRequestParams';
 
+const csv = require('fast-csv');
+import * as fs from 'fs';
+
 export class ScrapeJob{
 	calls: Bag<Call>;
 	config: SAPDFormParams;
@@ -77,8 +80,20 @@ export class ScrapeJob{
 		}
 	}
 
-	public async WriteCallsToCSV(): Promise<void>{
-		
+	public GetCallsAsCSVString(): Promise<string|Error>{
+		return new Promise((resolve, reject)=>{
+			let arrayOfCalls = [];
+
+			for (let call of this.calls){
+				arrayOfCalls.push(call);
+			}
+
+
+			return csv.writeToString(arrayOfCalls, {headers:false}, function(err, data){
+				if (err) return reject(err);
+				return resolve(data);
+			});
+		});
 	}
 
 	public getCalls(): Bag<Call>{

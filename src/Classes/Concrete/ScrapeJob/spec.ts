@@ -8,14 +8,14 @@ const assert = chai.assert;
 sinon.assert.expose(assert, {prefix: ''});
 
 
-describe('ScrapeJob', ()=>{
+describe('ScrapeJob', function(){
+	this.timeout(60000);
 	let job = new ScrapeJob('06/07/2017');
 	describe('Methods', ()=>{
 		beforeEach(()=>{
 			job = new ScrapeJob('06/07/2017');
 		});
 		describe.skip('run', function(){
-			this.timeout(15000);
 			it('fills the bag of calls for a search with calls', async ()=>{
 				const run = await job.run();
 
@@ -35,18 +35,30 @@ describe('ScrapeJob', ()=>{
 
 		});
 
-		describe('databaseAllCalls', ()=>{
+		describe.skip('databaseAllCalls', function(){
 			it('adds every call in the bag to the db', async ()=>{
+
 				const run = await job.run();
 
-				
-			})
-		})
+				const db = await job.DatabaseAllCalls();
+
+				assert.isTrue(db);
+			});
+		});
 
 		describe('getCalls', ()=>{
 			it('returns a Bag', ()=>{
 
 				assert.instanceOf(job.getCalls(), Bag);
+			});
+		});
+
+		describe('GetCallsAsCSVString', ()=>{
+			it('returns a string', async ()=>{
+				const run = await job.run();
+				const csv = await job.GetCallsAsCSVString();
+
+				assert.typeOf(csv, 'string');
 			});
 		});
 	});
