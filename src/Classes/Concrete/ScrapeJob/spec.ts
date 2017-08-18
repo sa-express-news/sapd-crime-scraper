@@ -54,11 +54,16 @@ describe('ScrapeJob', function(){
 		});
 
 		describe('GetCallsAsCSVString', ()=>{
-			it('returns a string', async ()=>{
+			it.skip('returns a string', async ()=>{
 				const run = await job.run();
 				const csv = await job.GetCallsAsCSVString();
 
 				assert.typeOf(csv, 'string');
+			});
+
+			it('is an empty string if the bag of calls is empty', async ()=>{
+				const csv = await job.GetCallsAsCSVString();
+				assert.strictEqual(csv, '');
 			});
 		});
 	});

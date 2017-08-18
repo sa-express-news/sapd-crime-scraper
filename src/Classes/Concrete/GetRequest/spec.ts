@@ -6,7 +6,9 @@ const assert = chai.assert;
 describe('GetRequest', ()=>{
 	describe('Methods', ()=>{
 		describe('get', ()=>{
-			it('should return a Document', async ()=>{
+			it('should return a Document', async function(){
+				this.timeout(5000);
+
 				const request = new GetRequest();
 
 				const document = await request.get('https://example.com');

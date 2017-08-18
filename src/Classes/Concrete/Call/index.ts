@@ -24,9 +24,9 @@ export class Call{
 		this.zipcode = callData.zipcode;
 	}
 
-	public async addToDb(): Promise<boolean>{
+	public async addToDb(): Promise<boolean|Error>{
 		try {
-			 const add = await CallModel.create({
+			 const insert = await CallModel.upsert({
 				incidentNumber: this.incidentNumber,
 				category: this.category,
 				problemType: this.problemType,
@@ -41,7 +41,24 @@ export class Call{
 			return true;			
 		}
 		catch(e){
-			return false;
+			return e;
 		}
+
+		// CallModel.upsert({
+		// 	incidentNumber: this.incidentNumber,
+		// 	category: this.category,
+		// 	problemType: this.problemType,
+		// 	responseDate: this.responseDate,
+		// 	address: this.address,
+		// 	hoa: this.hoa,
+		// 	schoolDistrict: this.schoolDistrict,
+		// 	councilDistrict: this.councilDistrict,
+		// 	zipcode: this.zipcode
+		// }).then(()=>{
+		// 	return true;
+		// }).catch((e)=>{
+		// 	return e;
+		// });
+		
 	}
 }
