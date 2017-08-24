@@ -24,7 +24,7 @@ export class Call{
 		this.zipcode = callData.zipcode;
 	}
 
-	public async addToDb(): Promise<boolean|Error>{
+	public async addToDb(): Promise<void>{
 		try {
 			 const insert = await CallModel.upsert({
 				incidentNumber: this.incidentNumber,
@@ -37,11 +37,10 @@ export class Call{
 				councilDistrict: this.councilDistrict,
 				zipcode: this.zipcode
 			});
-
-			return true;			
+		
 		}
 		catch(e){
-			return e;
+			throw new Error(e);
 		}
 
 		// CallModel.upsert({

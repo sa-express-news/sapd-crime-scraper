@@ -38,17 +38,17 @@ export class SAPDScrapeMachine implements ScrapeMachineParams{
 		});
 	}
 
-	public async runJobs(): Promise<void|Error>{
+	public async runJobs(): Promise<void>{
 		if (this.jobs.size() === 0){
-			return new Error('You must queue jobs before running them');
+			throw new Error('You must queue jobs before running them');
 		}
 
 		try{
 			for (let job of this.jobs){
-				let run = await job.run();
+				await job.run();
 			}
 		}catch(e){
-			return new Error(e);
+			throw new Error(e);
 		}
 	}
 

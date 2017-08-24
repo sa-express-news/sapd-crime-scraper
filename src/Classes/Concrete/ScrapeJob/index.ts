@@ -47,7 +47,7 @@ export class ScrapeJob{
 		this.calls = new Bag<Call>();
 	}
 
-	public async run(): Promise<void|Error>{
+	public async run(): Promise<void>{
 
 		try{
 		
@@ -71,18 +71,18 @@ export class ScrapeJob{
 			this.scrapeCalls(secondPage);		
 		}
 		catch(e){
-			return e;
+			throw new Error(e);
 		}
 	}
 
-	public async DatabaseAllCalls(): Promise<void|Error>{
+	public async DatabaseAllCalls(): Promise<void>{
 		try{
 			for (let call of this.calls){
-				let a = await call.addToDb();
+				await call.addToDb();
 			}			
 		}
 		catch(e){
-			return e;
+			throw new Error(e);
 		}
 	}
 
