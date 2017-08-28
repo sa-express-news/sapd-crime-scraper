@@ -17,12 +17,12 @@ export class PreviousMonthScrape{
 	}
 
 	private calculateStartDate(date: Date): Date{
-		let dateToReturn = date;
+		let dateToReturn = new Date(date);
 		dateToReturn.setMonth(date.getMonth() - 1, 1);
 		return dateToReturn;
 	}
 
 	private calculateEndDate(date: Date): Date{
-		return new Date(date.getFullYear(), date.getMonth() + 1, 0);
+		return new Date(date.getFullYear(), date.getMonth(), 0);
 	}
 }

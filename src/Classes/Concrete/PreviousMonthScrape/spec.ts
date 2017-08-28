@@ -23,11 +23,11 @@ describe('PreviousMonthScrape', ()=>{
 		});
 	});
 	describe('machine', ()=>{
-		it('has start and end dates in the same year', ()=>{
-			const machine = prev.getMachine();
+		// it('has start and end dates in the same year', ()=>{
+		// 	const machine = prev.getMachine();
 
-			assert.strictEqual(machine.startDate.getFullYear(), machine.endDate.getFullYear());
-		});
+		// 	assert.strictEqual(machine.startDate.getFullYear(), machine.endDate.getFullYear());
+		// });
 
 		it('has a start date of the first of the month', ()=>{
 			const machine = prev.getMachine();
