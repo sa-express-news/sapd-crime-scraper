@@ -26,7 +26,7 @@ export class Call{
 
 	public async addToDb(): Promise<void>{
 		try {
-			 const insert = await CallModel.upsert({
+			const insert = await CallModel.upsert({
 				incidentNumber: this.incidentNumber,
 				category: this.category,
 				problemType: this.problemType,

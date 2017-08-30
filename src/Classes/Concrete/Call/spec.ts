@@ -7,13 +7,15 @@ import * as sinon from 'sinon';
 const assert = chai.assert;
 
 describe('Call', ()=>{
+	
+	before(async()=>{
+		await CallModel.sync();
+	});
+
 	describe('Methods', ()=>{
 		describe('addToDb', ()=>{
-			afterEach(()=>{
-				CallModel.destroy({ where: {incidentNumber: 'calltest'}})
-					.then(testCall =>{
-
-				});
+			afterEach(async ()=>{
+				await CallModel.destroy({ where: {incidentNumber: 'calltest'}});
 			});
 
 			it('should add the call to the DB', async function(){
@@ -34,10 +36,14 @@ describe('Call', ()=>{
 
 				await call.addToDb();
 
-				CallModel.findOne({where: {incidentNumber: 'calltest'}})
-					.then(testCall =>{
-						assert.isDefined(testCall);
-					});
+				const theCall = await CallModel.findOne({where: {incidentNumber: 'calltest'}});
+
+				assert.isDefined(theCall);
+
+				// CallModel.findOne({where: {incidentNumber: 'calltest'}})
+				// 	.then(testCall =>{
+				// 		assert.isDefined(testCall);
+				// 	});
 
 			});
 		});
