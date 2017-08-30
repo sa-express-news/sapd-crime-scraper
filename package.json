@@ -5,9 +5,13 @@
   "main": "index.js",
   "scripts": {
     "pretest": "tsc",
-    "test": "mocha ./build/**/spec.js",
+    "test": "NODE_ENV=test mocha ./build/**/**/spec.js",
+    "pretest-full": "tsc",
+    "test-full":"NODE_ENV=test TEST_NETWORK=true mocha ./build/**/**/spec.js",
     "prestart": "tsc",
-    "start": "node build/index.js"
+    "start": "node build/index.js",
+    "premonthly": "tsc",
+    "monthly": "node build/index.js -- monthly"
   },
   "keywords": [
     "San",
