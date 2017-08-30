@@ -32,7 +32,12 @@ export const CallModel = sequelize.define('call', {
 	zipcode: Sequelize.INTEGER
 });
 
-// CallModel.sync();
+async function syncTable(){
+	// await CallModel.sync();
+	// // sequelize.close();
+}
+
+// syncTable();
 
 
 // export const main : Function = async()=>{
