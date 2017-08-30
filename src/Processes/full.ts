@@ -1,8 +1,10 @@
-import { sequelize } from '../index';
+import { sequelize, CallModel } from '../index';
 import { FullScrape } from '../Classes/Concrete/FullScrape';
 
 async function main(){
 	try{
+		await CallModel.sync();
+
 		const scrapeMachine = new FullScrape(new Date()).getMachine();
 
 		scrapeMachine.QueueJobs();

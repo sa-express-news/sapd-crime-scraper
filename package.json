@@ -11,7 +11,9 @@
     "prestart": "tsc",
     "start": "node build/index.js",
     "premonthly": "tsc",
-    "monthly": "node build/index.js -- monthly"
+    "monthly": "node build/index.js -- monthly",
+    "pre-scrape-full": "tsc",
+    "scrape-full": "node build/Processes/full.js"
   },
   "keywords": [
     "San",
