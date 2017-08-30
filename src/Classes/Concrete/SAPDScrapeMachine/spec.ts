@@ -35,7 +35,6 @@ describe('SAPDScrapeMachine', function(){
 
 		assert.throws(badMachine);
 	});
-
 	describe('Methods', ()=>{
 		describe('queueJobs', ()=>{
 			it('fills the queue', ()=>{
@@ -44,39 +43,32 @@ describe('SAPDScrapeMachine', function(){
 			});
 		});
 
-		describe.skip('runJobs', ()=>{
-			it('fills the bag of calls in each job in the queue', async()=>{
-				const run = await machine.runJobs();
+		if(process.env.NETWOR_TEST === 'true'){
+			describe('runJobs', ()=>{
+				it('fills the bag of calls in each job in the queue', async()=>{
+					const run = await machine.runJobs();
 
-				const jobs = machine.getJobs();
+					const jobs = machine.getJobs();
 
-				for (let job of jobs){
-					assert.isAbove(job.getCalls().size(), 0);
-				}
-			});
+					for (let job of jobs){
+						assert.isAbove(job.getCalls().size(), 0);
+					}
+				});
 
-			it('throws an error if the queue is empty', async()=>{
-				const run = await machine.runJobs();
+				it.skip('throws an error if the queue is empty', async()=>{
+					const run = await machine.runJobs();
 
-				assert.typeOf(run, 'Error');
-			});
-		});
+					assert.typeOf(run, 'Error');
+				});
+			});						
+		}
+
+
 
 		describe('getJobs', ()=>{
 			it('returns a queue', ()=>{
 				assert.instanceOf(machine.getJobs(), Queue);
 			});
 		});
-
-		// describe('writeCallsToFile', ()=>{
-		// 	it('writes the calls to a file'), async()=>{
-		// 		const write = await machine.writeCallsToFile('test.csv');
-
-		// 		fs.readFile('test.csv', 'utf8', (err, data)=>{
-		// 			assert.isNull(err);
-		// 			assert.isDefined(data);
-		// 		});
-		// 	}
-		// })
 	});
 });
