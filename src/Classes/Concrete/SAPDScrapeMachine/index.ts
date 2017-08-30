@@ -29,12 +29,25 @@ export class SAPDScrapeMachine implements ScrapeMachineParams{
 	}
 
 	public QueueJobs(): void{
-		const targetDates: string[] = this.getAllDatesBetweenInclusive(this.startDate, this.endDate).map((date)=> {return this.convertDateToRequiredString(date)});
+		const targetDates: Date[] = this.getAllDatesBetweenInclusive(this.startDate, this.endDate);
 
-		targetDates.forEach(dateString=>{
-			this.districts.forEach(district=>{
-				this.jobs.enqueue(new ScrapeJob(dateString, district));
-			});
+		targetDates.forEach(date =>{
+			let scrapeStartDate: string = this.convertDateToRequiredString(date);
+			//Check if we can add two days to the date and still be in the range
+			let twoDaysLater = new Date(date.getTime() + 172800000);
+			if (twoDaysLater.getTime() <= this.endDate.getTime()){
+				//if it is, we can create one job for the whole three-day range
+
+				let scrapeEndDate: string = this.convertDateToRequiredString(twoDaysLater);
+				this.districts.forEach(district=>{
+					this.jobs.enqueue(new ScrapeJob(scrapeStartDate, district, scrapeEndDate));
+				});
+			}else{
+				//We can't add two days and stay in range, so we just queue a one-day job for each district
+				this.districts.forEach(district=>{
+					this.jobs.enqueue(new ScrapeJob(scrapeStartDate, district));
+				});
+			}
 		});
 	}
 
