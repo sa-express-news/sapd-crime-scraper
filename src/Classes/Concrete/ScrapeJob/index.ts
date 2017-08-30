@@ -17,7 +17,7 @@ export class ScrapeJob{
 	config: SAPDFormParams;
 	private page: Document;
 
-	constructor(day: string, councilDistrict?: number){
+	constructor(day: string, councilDistrict: number, endDate?: string){
 		this.config = {
 			ToolkitScriptManager1_HiddenField: ';;AjaxControlToolkit, Version=3.5.60623.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e:en-US:834c499a-b613-438c-a778-d32ab4976134:f9cec9bc:de1feab2:f2c8e708:720a52bf:589eaa30:698129cf:d9d4bb33:fcf0e993:fb9b4c57:ccb96cf9',
 			__EVENTTARGET: '',
@@ -28,21 +28,15 @@ export class ScrapeJob{
 			__EVENTVALIDATION: '',
 			txtStart: day,
 			rdbSearchRange: 'day',
-			txtEndDate: day,
+			txtEndDate: endDate ? endDate : day,
 			txtZipcode: '',
 			ddlCategory: 'ALL ',
-			ddlCouncilDistrict: '1',
+			ddlCouncilDistrict: councilDistrict.toString(),
 			ddlSchoolDistrict: ' ',
 			cbxHOA$cbxHOA_TextBox: '',
 			cbxHOA$cbxHOA_HiddenField: '-1',
 			btnSearch: 'View Data'
 		};
-
-		if(councilDistrict){
-			this.config.ddlCouncilDistrict = councilDistrict.toString();
-		}
-
-
 
 		this.calls = new Bag<Call>();
 	}
@@ -158,8 +152,8 @@ export class ScrapeJob{
 				address: tableData[4],
 				hoa: tableData[5],
 				schoolDistrict: tableData[6],
-				councilDistrict: parseInt(tableData[7]),
-				zipcode: tableData[8] !== '' ? parseInt(tableData[8]) : 0
+				councilDistrict: tableData[7].trim() !== ''? parseInt(tableData[7]) : 99,
+				zipcode: tableData[8].trim() !== '' ? parseInt(tableData[8]) : 0
 			};
 
 			this.calls.add(new Call(callInfo));
