@@ -1,27 +1,36 @@
 import { PostRequest } from './index';
 import * as chai from 'chai';
+import * as nock from 'nock';
 import 'mocha';
 const assert = chai.assert;
 
-if(process.env.NETWORK_TEST === 'true'){
-	describe('PostRequest', ()=>{
-		describe('methods', ()=>{
-			describe('post', ()=>{
-				it('should succesfully post', async function(){
-					this.timeout(10000);
-					const dummyParams = {
-						method: 'POST',
-						uri: 'https://httpbin.org/post'
-					};
 
-					const post = new PostRequest(dummyParams);
+describe('PostRequest', () => {
+	describe('methods', () => {
+		describe('post', () => {
+			before(() => {
+				const fakeServer = nock('https://foobar.com')
+					.post('/')
+					.reply(200, 'foobar');
+			});
+			after(() => {
+				nock.cleanAll();
+			});
+			it('should succesfully post', async function () {
+				const dummyParams = {
+					method: 'POST',
+					uri: 'https://foobar.com'
+				};
 
-					const response = await post.post();
+				const post = new PostRequest(dummyParams);
 
-					assert.isString(response);
-				});
+				const response = await post.post();
+				console.log(response);
+
+				assert.isString(response);
 			});
 		});
-	});	
-}
+	});
+});
+
 
