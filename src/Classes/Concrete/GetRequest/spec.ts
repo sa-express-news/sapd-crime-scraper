@@ -7,13 +7,14 @@ const assert = chai.assert;
 
 describe('GetRequest', () => {
 	describe('Methods', () => {
+		before(() => {
+			const fakeServer = nock('https://example.com')
+				.get('/')
+				.replyWithFile(200, path.join(__dirname, '/../../../../src/Classes/Concrete/GetRequest/example.html'));
+		})
 		after(() => {
 			nock.cleanAll();
 		})
-		const fakeServer = nock('https://example.com')
-			.persist()
-			.get('/')
-			.replyWithFile(200, path.join(__dirname, '/../../../../src/Classes/Concrete/GetRequest/example.html'));
 		describe('get', () => {
 			it('should return a Document', async function () {
 				this.timeout(5000);
