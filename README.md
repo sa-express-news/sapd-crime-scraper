@@ -34,11 +34,3 @@ TEST_DB=sapd_test
 DB_USER=your_db_user
 DB_Pass=your_db_password
 ```
-
-The script expects to connect to an SMTP server (we use our organization Outlook one) to send the results of scrape jobs to other email recipients. The `EMAIL_RECIPIENTS` environment variable is a comma-separated list of those recipients.
-
-### Automating Scrape Jobs ###
-
-This repository contains a `daily.sh` script that will request all of the complaints for the day prior, add them to the `tceq` database and send them in an email to the addresses listed in the `EMAIL_RECIPIENTS` environment variable.
-
-You can automate this script with a cron job; we recommend setting it for late at night as complaints can come in throughout the day (another reason we request for the day prior). Also keep in mind that complaints for a given date can get added days later; this daily scrape job will not pick them up.
