@@ -90,6 +90,27 @@ CREATE SEQUENCE calls_id_seq
     NO MAXVALUE
     CACHE 1;
 
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY empty ALTER COLUMN id SET DEFAULT nextval('empty_id_seq'::regclass);
+
+
+--
+-- Data for Name: empty; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY empty (id, foo) FROM stdin;
+\.
+
+
+--
+-- Name: empty_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('empty_id_seq', 7, true);
+
 
 --
 -- Name: calls_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
@@ -103,6 +124,13 @@ ALTER SEQUENCE calls_id_seq OWNED BY calls.id;
 --
 
 ALTER TABLE ONLY calls ALTER COLUMN id SET DEFAULT nextval('calls_id_seq'::regclass);
+
+--
+-- Name: uniqueid; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY empty
+    ADD CONSTRAINT uniqueid UNIQUE (id);
 
 
 --
