@@ -34,6 +34,34 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: empty; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE empty (
+    id integer NOT NULL,
+    foo character varying
+);
+
+
+--
+-- Name: empty_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE empty_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: empty_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE empty_id_seq OWNED BY empty.id;
+
+--
 -- Name: calls; Type: TABLE; Schema: public; Owner: -
 --
 
