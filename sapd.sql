@@ -47,9 +47,7 @@ CREATE TABLE calls (
     hoa character varying(255),
     "schoolDistrict" character varying(255),
     "councilDistrict" integer,
-    zipcode integer,
-    "createdAt" timestamp with time zone NOT NULL,
-    "updatedAt" timestamp with time zone NOT NULL
+    zipcode integer
 );
 
 
