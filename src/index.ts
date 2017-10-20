@@ -1,4 +1,3 @@
-import * as Sequelize from 'sequelize';
 import * as dotenv from 'dotenv';
 
 import { ScrapeJob } from './Classes/Concrete/ScrapeJob';
@@ -7,32 +6,9 @@ import { PreviousMonthScrape } from './Classes/Concrete/PreviousMonthScrape';
 
 dotenv.config();
 
-const db: string = process.env.NODE_ENV === 'test' ? process.env.TEST_DB : process.env.DB; 
+const db: string = process.env.NODE_ENV === 'test' ? process.env.TEST_DB : process.env.DB;
 
-export const sequelize = new Sequelize(db, process.env.DB_USER, process.env.DB_PASS,{
-	host: process.env.DB_HOST,
-	dialect: 'postgres',
-	pool: {
-		max: 10,
-		min: 0,
-		idle: 1000
-	},
-	logging: false
-});
-
-export const CallModel = sequelize.define('call', {
-	incidentNumber: {type: Sequelize.STRING, unique:true},
-	category: Sequelize.STRING,
-	problemType: Sequelize.STRING,
-	responseDate: Sequelize.DATE,
-	address: Sequelize.STRING,
-	hoa: Sequelize.STRING,
-	schoolDistrict: Sequelize.STRING,
-	councilDistrict: Sequelize.INTEGER,
-	zipcode: Sequelize.INTEGER
-});
-
-async function syncTable(){
+async function syncTable() {
 	// await CallModel.sync();
 	// // sequelize.close();
 }

@@ -1,7 +1,7 @@
 import { CallData } from '../../../Interfaces/Call';
-import { CallModel } from '../../../index';
 
-export class Call{
+
+export class Call {
 	private incidentNumber: string;
 	private category: string;
 	private problemType: string;
@@ -12,7 +12,7 @@ export class Call{
 	private councilDistrict: number;
 	private zipcode: number;
 
-	constructor(callData: CallData){
+	constructor(callData: CallData) {
 		this.incidentNumber = callData.incidentNumber;
 		this.category = callData.category;
 		this.problemType = callData.problemType;
@@ -24,40 +24,40 @@ export class Call{
 		this.zipcode = callData.zipcode;
 	}
 
-	public async addToDb(): Promise<void>{
-		try {
-			const insert = await CallModel.upsert({
-				incidentNumber: this.incidentNumber,
-				category: this.category,
-				problemType: this.problemType,
-				responseDate: this.responseDate,
-				address: this.address,
-				hoa: this.hoa,
-				schoolDistrict: this.schoolDistrict,
-				councilDistrict: this.councilDistrict,
-				zipcode: this.zipcode
-			});
-		
-		}
-		catch(e){
-			throw new Error(e);
-		}
+	// public async addToDb(): Promise<void> {
+	// 	try {
+	// 		const insert = await CallModel.upsert({
+	// 			incidentNumber: this.incidentNumber,
+	// 			category: this.category,
+	// 			problemType: this.problemType,
+	// 			responseDate: this.responseDate,
+	// 			address: this.address,
+	// 			hoa: this.hoa,
+	// 			schoolDistrict: this.schoolDistrict,
+	// 			councilDistrict: this.councilDistrict,
+	// 			zipcode: this.zipcode
+	// 		});
 
-		// CallModel.upsert({
-		// 	incidentNumber: this.incidentNumber,
-		// 	category: this.category,
-		// 	problemType: this.problemType,
-		// 	responseDate: this.responseDate,
-		// 	address: this.address,
-		// 	hoa: this.hoa,
-		// 	schoolDistrict: this.schoolDistrict,
-		// 	councilDistrict: this.councilDistrict,
-		// 	zipcode: this.zipcode
-		// }).then(()=>{
-		// 	return true;
-		// }).catch((e)=>{
-		// 	return e;
-		// });
-		
-	}
+	// 	}
+	// 	catch (e) {
+	// 		throw new Error(e);
+	// 	}
+
+	// 	// CallModel.upsert({
+	// 	// 	incidentNumber: this.incidentNumber,
+	// 	// 	category: this.category,
+	// 	// 	problemType: this.problemType,
+	// 	// 	responseDate: this.responseDate,
+	// 	// 	address: this.address,
+	// 	// 	hoa: this.hoa,
+	// 	// 	schoolDistrict: this.schoolDistrict,
+	// 	// 	councilDistrict: this.councilDistrict,
+	// 	// 	zipcode: this.zipcode
+	// 	// }).then(()=>{
+	// 	// 	return true;
+	// 	// }).catch((e)=>{
+	// 	// 	return e;
+	// 	// });
+
+	// }
 }

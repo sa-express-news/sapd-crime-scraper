@@ -41,14 +41,12 @@
     "@types/jsdom": "^11.0.1",
     "@types/pg": "^6.1.43",
     "@types/request-promise-native": "^1.0.6",
-    "@types/sequelize": "^4.0.69",
     "dotenv": "^4.0.0",
     "fast-csv": "^2.4.0",
     "jsdom": "^11.1.0",
     "pg": "6.4.1",
     "pg-hstore": "^2.3.2",
     "pg-promise": "^7.0.0",
-    "request-promise-native": "^1.0.4",
-    "sequelize": "^4.5.0"
+    "request-promise-native": "^1.0.4"
   }
 }

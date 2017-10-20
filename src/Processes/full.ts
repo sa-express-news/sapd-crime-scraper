@@ -1,9 +1,9 @@
-import { sequelize, CallModel } from '../index';
+// import { sequelize, CallModel } from '../index';
 import { FullScrape } from '../Classes/Concrete/FullScrape';
 
-async function main(){
-	try{
-		await CallModel.sync();
+async function main() {
+	try {
+		// await CallModel.sync();
 
 		const scrapeMachine = new FullScrape(new Date()).getMachine();
 
@@ -11,14 +11,14 @@ async function main(){
 		await scrapeMachine.runJobs();
 		const jobs = scrapeMachine.getJobs();
 
-		for (let job of jobs){
-			await job.DatabaseAllCalls();
-		}
+		// for (let job of jobs){
+		// 	await job.DatabaseAllCalls();
+		// }
 
-		sequelize.close();
+		// sequelize.close();
 
-		console.log(`All calls scraped and added to database ${process.env.DB}`);			
-	}catch(e){
+		console.log(`All calls scraped and added to database ${process.env.DB}`);
+	} catch (e) {
 		throw new Error(e);
 	}
 

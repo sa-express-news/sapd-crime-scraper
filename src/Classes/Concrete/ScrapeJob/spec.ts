@@ -36,20 +36,20 @@ describe('ScrapeJob', function () {
 
 			});
 
-			describe('databaseAllCalls', function () {
-				it('adds every call in the bag to the db', async () => {
+			// describe('databaseAllCalls', function () {
+			// 	it('adds every call in the bag to the db', async () => {
 
-					await job.run();
+			// 		await job.run();
 
-					const callDbStub = sinon.stub(Call.prototype, 'addToDb');
+			// 		const callDbStub = sinon.stub(Call.prototype, 'addToDb');
 
-					await job.DatabaseAllCalls();
+			// 		await job.DatabaseAllCalls();
 
-					callDbStub.restore();
+			// 		callDbStub.restore();
 
-					sinon.assert.called(callDbStub);
-				});
-			});
+			// 		sinon.assert.called(callDbStub);
+			// 	});
+			// });
 		}
 
 		describe('getCalls', () => {
