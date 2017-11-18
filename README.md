@@ -28,9 +28,9 @@ This scraper relies on environment variables to operate the database, test suite
 
 ```
 DB_HOST=your_database_host
-PORT=your_database_port
+DB_PORT=your_database_port
 DB=sapd
 TEST_DB=sapd_test
 DB_USER=your_db_user
-DB_Pass=your_db_password
+DB_PASS=your_db_password
 ```
