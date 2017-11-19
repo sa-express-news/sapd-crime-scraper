@@ -4,3 +4,11 @@ export interface GetDocumentResponse {
     document: Document;
     cookieJar: CookieJar
 }
+
+export interface PostFormParams {
+    method: 'POST';
+    uri: string;
+    form: object;
+    jar?: CookieJar;
+    headers?: object;
+}

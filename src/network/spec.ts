@@ -6,33 +6,54 @@ const assert = chai.assert;
 
 import * as net from './index';
 
+import { PostFormParams } from '../Interfaces';
+
 describe('Network', () => {
+    const endpoint = 'https://example.com';
+    const badEndpoint = 'https://500error.com';
+    before(() => {
+        const badGetServer = nock(badEndpoint)
+            .persist()
+            .get('/')
+            .reply(500);
+
+        const badPostServer = nock(badEndpoint)
+            .persist()
+            .post('/')
+            .reply(500);
+    });
+    after(() => {
+        nock.cleanAll();
+    })
+
     describe('getDocument', () => {
-        const endpoint = 'https://example.com'
         before(() => {
             const fakeServer = nock(endpoint)
                 .get('/')
                 .replyWithFile(200, path.join(__dirname, '/../../src/network/example.html'));
-        })
-        after(() => {
-            nock.cleanAll();
-        })
-        it('throws an error if the request does not properly execute', async () => {
-
-            let err;
-
-            try {
-                const result = await net.getDocument('http://httpstat.us/500');
-            } catch (e) {
-                err = e;
-            }
-
-            assert.typeOf(err, 'Error');
         });
-        describe('successful response', async () => {
-            const response = await net.getDocument(endpoint);
+        describe('unsuccessful request', () => {
+            it('throws an error if the request does not properly execute', async () => {
 
-            const { document, cookieJar } = response;
+                let err;
+
+                try {
+                    const result = await net.getDocument(badEndpoint);
+                } catch (e) {
+                    err = e;
+                }
+
+                assert.typeOf(err, 'Error');
+            });
+        });
+        describe('successful request', async () => {
+            let response, document, cookieJar;
+
+            before(async () => {
+                response = await net.getDocument(endpoint);
+                document = response.document;
+                cookieJar = response.cookieJar;
+            });
             it('returns an object', () => {
                 assert.isObject(response);
             });
@@ -45,6 +66,55 @@ describe('Network', () => {
                 assert.isFunction(setCookie);
                 assert.isFunction(getCookieString);
                 assert.isFunction(getCookies);
+            });
+        });
+    });
+    describe('postForm', () => {
+        before(() => {
+            const fakeServer = nock(endpoint)
+                .persist()
+                .post('/', {
+                    username: 'kia',
+                    password: 'alvvays'
+                })
+                .reply(200, 'foobar');
+        });
+        describe('unsuccessful request', () => {
+            it('throws an error if the request does not properly execute', async () => {
+
+                let err;
+
+                const params: PostFormParams = {
+                    method: 'POST',
+                    uri: badEndpoint,
+                    form: {
+                        username: 'kia'
+                    }
+                };
+
+                try {
+                    const result = await net.postForm(params);
+                } catch (e) {
+                    err = e;
+                }
+
+                assert.typeOf(err, 'Error');
+            });
+        });
+        describe('successful request', () => {
+            it('returns whatever the server should return', async () => {
+                const params: PostFormParams = {
+                    method: 'POST',
+                    uri: endpoint,
+                    form: {
+                        username: 'kia',
+                        password: 'alvvays'
+                    }
+                };
+
+                const response = await net.postForm(params);
+                assert.isString(response);
+                assert.strictEqual(response, 'foobar');
             });
         });
     });
