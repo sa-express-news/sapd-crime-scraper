@@ -12,3 +12,9 @@ export interface PostFormParams {
     jar?: CookieJar;
     headers?: object;
 }
+
+export interface SAPDSessionState {
+    __VIEWSTATE: string;
+    __VIEWSTATEGENERATOR: string;
+    __EVENTVALIDATION: string;
+}
