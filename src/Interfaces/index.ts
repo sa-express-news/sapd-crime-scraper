@@ -18,3 +18,15 @@ export interface SAPDSessionState {
     __VIEWSTATEGENERATOR: string;
     __EVENTVALIDATION: string;
 }
+
+export interface Call {
+    incidentNumber: string;
+    category: string;
+    problemType: string;
+    responseDate: Date;
+    address: string;
+    hoa: string;
+    schoolDistrict: string;
+    councilDistrict: number;
+    zipcode: number;
+}
