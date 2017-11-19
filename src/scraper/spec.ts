@@ -3,6 +3,9 @@ import * as chai from 'chai';
 import 'mocha';
 
 import * as scraper from './index';
+import resultsPageHTMLString from './resultsPageHTMLString';
+
+import { Call } from '../Interfaces';
 
 const assert = chai.assert;
 
@@ -47,6 +50,66 @@ describe('Scraper', () => {
 
                 assert.typeOf(err, 'Error');
             });
+        });
+    });
+    describe('scrapeCallsFromPage', () => {
+        describe('page contains a table of calls', () => {
+            const { document } = (new JSDOM(resultsPageHTMLString)).window;
+
+            const calls = scraper.scrapeCallsFromPage(document);
+            it('returns an array', () => {
+                assert.isArray(calls);
+            });
+            it('each item in the array is a call', () => {
+
+            })
+        });
+    });
+    describe('isCall', () => {
+        it('returns true if the object passed is a valid Call', () => {
+            const call: Call = {
+                incidentNumber: 'foo',
+                category: 'bar',
+                problemType: 'baz',
+                responseDate: new Date(),
+                address: 'i',
+                hoa: 'am',
+                schoolDistrict: 'listening',
+                councilDistrict: 500,
+                zipcode: 1
+            };
+
+            assert.isTrue(scraper.isCall(call));
+        });
+        it('returns false if any of the required Call properties are missing', () => {
+            const call = {
+                incidentNumber: 'foo',
+                category: 'bar',
+                problemType: 'baz',
+                address: 'i',
+                hoa: 'am',
+                schoolDistrict: 'listening',
+                councilDistrict: 500,
+                zipcode: 1
+            };
+
+            assert.isFalse(scraper.isCall(call));
+
+        });
+        it('returns false if any of the required Call properties are the wrong type', () => {
+            const call = {
+                incidentNumber: 'foo',
+                category: 'bar',
+                problemType: 'baz',
+                responseDate: { foo: 'bar' },
+                address: 'i',
+                hoa: 'am',
+                schoolDistrict: 'listening',
+                councilDistrict: 500,
+                zipcode: 1
+            };
+
+            assert.isFalse(scraper.isCall(call));
         });
     });
 });

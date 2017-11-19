@@ -1,4 +1,4 @@
-import { SAPDSessionState } from '../Interfaces';
+import { SAPDSessionState, Call } from '../Interfaces';
 
 export const collectSAPDSessionState = (page: Document): SAPDSessionState => {
     const viewStateInput = <HTMLInputElement>page.getElementById('__VIEWSTATE');
@@ -19,4 +19,47 @@ export const collectSAPDSessionState = (page: Document): SAPDSessionState => {
         __VIEWSTATEGENERATOR: viewStateGenerator,
         __EVENTVALIDATION: eventValidation
     };
+}
+
+export const scrapeCallsFromPage = (page: Document): Call[] => {
+    const table = page.getElementById('gvCFS');
+    const rows = Array.from(table.getElementsByTagName('tr'));
+    //We splice the first element because it's just the column headers
+    rows.splice(0, 1);
+
+    const calls: Call[] = rows.map((tr: HTMLTableRowElement) => {
+        const tableData: string[] = Array.from(tr.getElementsByTagName('td')).map(td => { return td.textContent });
+
+        const call: Call = {
+            incidentNumber: tableData[0],
+            category: tableData[1],
+            problemType: tableData[2],
+            responseDate: new Date(tableData[3]),
+            address: tableData[4],
+            hoa: tableData[5],
+            schoolDistrict: tableData[6],
+            councilDistrict: tableData[7].trim() !== '' ? parseInt(tableData[7]) : 99,
+            zipcode: tableData[8].trim() !== '' ? parseInt(tableData[8]) : 0
+        };
+
+        return call;
+    });
+
+    return calls;
+}
+
+export const isCall = (object: object): boolean => {
+    const { incidentNumber, category, problemType, responseDate, address, hoa, schoolDistrict, councilDistrict, zipcode } = <Call>object;
+
+    if (typeof incidentNumber !== 'string') return false;
+    if (typeof category !== 'string') return false;
+    if (typeof problemType !== 'string') return false;
+    if (Object.prototype.toString.call(responseDate) !== "[object Date]") return false;
+    if (typeof address !== 'string') return false;
+    if (typeof hoa !== 'string') return false;
+    if (typeof schoolDistrict !== 'string') return false;
+    if (isNaN(councilDistrict)) return false;
+    if (isNaN(zipcode)) return false;
+
+    return true;
 }
