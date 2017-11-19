@@ -24,10 +24,14 @@ export const collectSAPDSessionState = (page: Document): SAPDSessionState => {
 export const scrapeCallsFromPage = (page: Document): Call[] => {
     const table = page.getElementById('gvCFS');
     const rows = Array.from(table.getElementsByTagName('tr'));
+
+    if (!table || !rows) {
+        throw new Error('Page does not contain expected call table');
+    }
     //We splice the first element because it's just the column headers
     rows.splice(0, 1);
 
-    const calls: Call[] = rows.map((tr: HTMLTableRowElement) => {
+    const rawCalls: Call[] = rows.map((tr: HTMLTableRowElement) => {
         const tableData: string[] = Array.from(tr.getElementsByTagName('td')).map(td => { return td.textContent });
 
         const call: Call = {
@@ -44,6 +48,8 @@ export const scrapeCallsFromPage = (page: Document): Call[] => {
 
         return call;
     });
+
+    const calls = rawCalls.filter(isCall);
 
     return calls;
 }

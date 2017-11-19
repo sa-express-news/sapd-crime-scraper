@@ -61,8 +61,22 @@ describe('Scraper', () => {
                 assert.isArray(calls);
             });
             it('each item in the array is a call', () => {
+                calls.forEach(call => assert.isTrue(scraper.isCall(call)));
+            });
+        });
+        describe('page does not contain the expected table of calls', () => {
+            it('throws an error if there is no table at all', () => {
+                const { document } = (new JSDOM(`<!DOCTYPE html>`)).window;
+                let err;
 
-            })
+                try {
+                    const calls = scraper.scrapeCallsFromPage(document);
+                } catch (e) {
+                    err = e;
+                }
+
+                assert.typeOf(err, 'Error');
+            });
         });
     });
     describe('isCall', () => {
