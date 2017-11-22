@@ -1,6 +1,8 @@
 import * as chai from 'chai';
 import * as nock from 'nock';
 import * as path from 'path';
+import * as rp from 'request-promise-native';
+import { cookie } from 'request';
 import 'mocha';
 const assert = chai.assert;
 
@@ -29,6 +31,7 @@ describe('Network', () => {
     describe('getDocument', () => {
         before(() => {
             const fakeServer = nock(endpoint)
+                .persist()
                 .get('/')
                 .replyWithFile(200, path.join(__dirname, '/../../src/network/example.html'));
         });
@@ -66,6 +69,16 @@ describe('Network', () => {
                 assert.isFunction(setCookie);
                 assert.isFunction(getCookieString);
                 assert.isFunction(getCookies);
+            });
+            it('if passed a cookieJar, it returns the same one after a request', async () => {
+                const cookieJar = rp.jar();
+                const theCookie = cookie('foo=bar');
+                cookieJar.setCookie(theCookie, 'http://foobar.com');
+
+                const response = await net.getDocument(endpoint, cookieJar);
+                const responseJar = response.cookieJar;
+
+                assert.strictEqual('foo=bar', responseJar.getCookieString('http://foobar.com'))
             });
         });
     });
