@@ -1,0 +1,387 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>
+	Police Calls Reports
+</title>
+
+    <style type="text/css">
+        body {
+            color: #000000;
+            font-family: verdana, arial, helvetica, sans-serif;
+            font-size: 11px;
+        }
+        #top, #middle, #footer{ 
+	        /*width: 980px;*/
+	        margin: 0px;
+        	
+        }
+        #top-wrap, #middle-wrap, #footer-wrap{
+	        /*width: 980px;*/
+	        margin: 0px auto;
+	        clear: both;
+        	
+        }
+        #middle-nocolumn { /* Replaces #Middle-center */
+            float:none;
+            /*position: relative;*/
+            /*width: 900px;*/
+	        margin: 0 50px 0 50px;
+            z-index: 100;
+
+
+        }
+        p, td, th, ul, li, caption, label, legend, fieldset, blockquote, cite, .blue ul.mega-menu .sub li.mega-hdr li a, #menu li ul li, .accordionContent li{
+	    font-family: Arial, Helvetica, sans-serif;
+	    text-align: left;
+    	font-size: 12px;
+	    line-height: 16px;
+	    border: none;
+	    font-weight: normal;
+	    color: #5E5F5F;
+	    text-transform: none;
+        }
+        h1, h2, h3, h4, h5, h6, .more, .block li, .news-teaser .date, .staff .name, .smleft-title, .emergency-info, #info p, #nav .nav, .megamenu .column h3, .block h6, .block h5, ul.ldd_menu > li > span, #nav li.ldd_heading, a.ldd_subfoot, .blue ul.mega-menu li a, .emergency-info li, .blue ul.mega-menu li .sub li.mega-hdr, #menu li{
+	        font-family: 'MyriadProBoldCondensed', Arial, Helvetica, sans-serif;
+	        letter-spacing: 0px;
+	        color: #000;
+	        text-transform: uppercase;
+	        font-weight: normal;
+        	/*
+	        *font-family: Arial, Helvetica, sans-serif;
+	        *font-weight: bolder;
+	        *letter-spacing: .2;
+	        }*/
+        }
+        .bold td
+        {   font-weight:bold;
+        }
+        .style1
+        {
+            height: 46px;
+        }
+        h3 {
+	        font-size: 20px;
+	        color: #BB2025;
+	        line-height: 24px;
+	        margin-top: 15px;
+        }
+                a, a:link, a:visited, a:hover, a:active{
+	        color: #000;
+	        text-decoration: none;  
+	        border: none;
+        }
+        a:hover, a:active{
+	        text-decoration: underline;
+	        border: none;
+        }
+</style>
+
+
+<link href="/PoliceCalls/WebResource.axd?d=fie_5ADqMUpu6xZ1eggG9UOlYR7rDJhkt7kc9n_d3ek0nF1elHtnlCinWVGSPXfB3nSV9J0_c5U_A4q68BVYwl6C6ihHQQz5jiNvD7EvlpiKlZMzlKGcLjr6lch0JaBNkjmwHA2&amp;t=634811401959920382" type="text/css" rel="stylesheet" /><link href="/PoliceCalls/WebResource.axd?d=Vx3mwP_kFEbUXRYnvQpVNdfk_TpXsDxNhr6FXqeCnS5rxotWhwxQeeoaK0QhFiRrlh_N398Qqu-iCKNdkhstDmXV281_fUnsu5RQ9iZms27x940J2j80A7l2ur4iVyKxbhI1OQ2&amp;t=634811401959920382" type="text/css" rel="stylesheet" /></head>
+<body>
+<form name="form1" method="post" action="Reports.aspx" onsubmit="javascript:return WebForm_OnSubmit();" id="form1">
+<div>
+<input type="hidden" name="ToolkitScriptManager1_HiddenField" id="ToolkitScriptManager1_HiddenField" value="" />
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMjExMzQ5MzMwMw9kFgICBA9kFhACAw8PFgIeB1Zpc2libGVoZGQCBw8WBB4JU3RhcnREYXRlBgDAq/ddd81IHgdFbmREYXRlBgAAUlTyH9VIZAIRDxBkEBUDA0RheQRXZWVrBU1vbnRoFQMDZGF5BHdlZWsFbW9udGgUKwMDZ2dnFgBkAhkPFgQfAQYAwKv3XXfNSB8CBgAAUlTyH9VIZAInDxBkEBUFASAbQ3JpbWVzIEFnYWluc3QgUGVyc29uIENhbGxzFFByb3BlcnR5IENyaW1lIENhbGxzDVRyYWZmaWMgQ2FsbHMLT3RoZXIgQ2FsbHMVBQRBTEwgG0NyaW1lcyBBZ2FpbnN0IFBlcnNvbiBDYWxscxRQcm9wZXJ0eSBDcmltZSBDYWxscw1UcmFmZmljIENhbGxzC090aGVyIENhbGxzFCsDBWdnZ2dnZGQCKQ8QZBAVDAEgDE91dHNpZGUgQXJlYQExATIBMwE0ATUBNgE3ATgBOQIxMBUMASABMAExATIBMwE0ATUBNgE3ATgBOQIxMBQrAwxnZ2dnZ2dnZ2dnZ2dkZAIrDxBkEBUTASARQWxhbW8gSGVpZ2h0cyBJU0QKQm9lcm5lIElTRAlDb21hbCBJU0QQRWFzdCBDZW50cmFsIElTRAxFZGdld29vZCBJU0QIRm9ydCBTYW0OSGFybGFuZGFsZSBJU0QKSnVkc29uIElTRAhMYWNrbGFuZBFNZWRpbmEgVmFsbGV5IElTRA5Ob3J0aCBFYXN0IElTRA5Ob3J0aCBTaWRlIElTRA9TYW4gQW50b25pbyBJU0QSU2NoZXJ0ei1DaWJvbG8gSVNEDFNvbWVyc2V0IElTRA1Tb3V0aCBTYW4gSVNEDlNvdXRoIFNpZGUgSVNEDlNvdXRoIFdlc3QgSVNEFRMBIBBBbGFtbyBIZWlnaHQgSVNECkJvZXJuZSBJU0QJQ29tYWwgSVNEEEVhc3QgQ2VudHJhbCBJU0QMRWRnZXdvb2QgSVNECEZvcnQgU2FtDkhhcmxhbmRhbGUgSVNECkp1ZHNvbiBJU0QITGFja2xhbmQRTWVkaW5hIFZhbGxleSBJU0QOTm9ydGggRWFzdCBJU0QOTm9ydGggU2lkZSBJU0QPU2FuIEFudG9uaW8gSVNEElNjaGVydHotQ2lib2xvIElTRAxTb21lcnNldCBJU0QNU291dGggU2FuIElTRA5Tb3V0aCBTaWRlIElTRA5Tb3V0aCBXZXN0IElTRBQrAxNnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZGQCLQ8QDxYGHg1EYXRhVGV4dEZpZWxkBQNIT0EeDkRhdGFWYWx1ZUZpZWxkBQNIT0EeC18hRGF0YUJvdW5kZ2QQFYkDAA8xNjUgQXNzb2NpYXRpb24sNzYwMCBCcm9hZHdheSBDb25kbyBPQS8gT2FrIFBhcmsgLSBOb3J0aHdvb2QrNzYwMCBCcm9hZHdheSBDb25kbyBPQS9PYWsgUGFyayAtIE5vcnRod29vZBdBYmUgTGluY29sbiBBc3NvY2lhdGlvbihBYmUgTGluY29sbiBBc3NvY2lhdGlvbi9BbGFtbyBGYXJtc3RlYWQgNUFiZSBMaW5jb2xuIEFzc29jaWF0aW9uL0FsYW1vIEZhcm1zdGVhZHMgQmFiY29jayBSb2FkCkFkYW1zIEhpbGwdQWxhbW8gRmFybXN0ZWFkcyBCYWJjb2NrIFJvYWQRQWxhbW9kb21lIEdhcmRlbnMKQWx0YSBWaXN0YSdBcHBsZSBDcmVlayBQcm9wZXJ0eSBPd25lcnMgQXNzb2NpYXRpb24JQXJib3JldHVtC0F1YnVybiBPYWtzEUF2ZW5pZGEgR3VhZGFsdXBlD0JhdmFyaWFuIEZvcmVzdAtCZWFjb24gSGlsbBtCZWwgTWVhZGUgSG9tZXMgQXNzb2NpYXRpb24PQml0dGVycyBFbmNsYXZlEUJsYW5jbyBCbHVmZnMgSE9BDEJsb3Nzb20gUGFyaxJCbHVlIFJpZGdlIEVzdGF0ZXMRQmx1ZSBSb2NrIFNwcmluZ3MYQmx1ZmZ2aWV3IGF0IENhbWlubyBSZWFsDEJyYXVuIEhvbGxvdw1CcmF1biBPYWtzIE5BEkJyYXVuIFN0YXRpb24gRWFzdBJCcmF1biBTdGF0aW9uIFdlc3QZQnJhdW4gV2lsbG93IFVuaXQgMiBhbmQgNBJCcmF1biBXaWxsb3cgVW5pdDIKQnJpZGdld29vZAlCcm9va3dvb2QLQnJ5Y2UgUGxhY2UXQnJ5Y2UgUGxhY2UgLyBDYW1lbG90IDEOQ2FibGUtV2VzdHdvb2QfQ2FibGUtV2VzdHdvb2QvTGFja2xhbmQgVGVycmFjZQ5DYWRpbGxhYyBEcml2ZQlDYW1lbG90IDERQ2FtaW5vIEJhbmRlcmEgTkESQ2FudGVyYSBWaWxsYWdlIEhBFENhbnlvbiBDcmVlayBFc3RhdGVzFENhbnlvbiBDcmVlayBWaWxsYWdlEENhbnlvbiBQYXJrZSBIT0ETQ2FzdGxlIEhpbGxzIEZvcmVzdBJDYXN0bGUgV29vZCBGb3Jlc3QeQ2VkYXIgUG9pbnQgT3duZXJzIEFzc29jaWF0aW9uG0NlbnRyYWwgTG9zIEFuZ2VsZXMgSGVpZ2h0cxhDRiBDb21tdW5pdHkgQXNzb2NpYXRpb24PQ2hhbXBpb25zIFJpZGdlKENoZXJyeSBIaWxsIEktMTAgJiBIb3VzdG9uIFN0IC0gQ29ycmlkb3IRQ2h1cmNoaWxsIEVzdGF0ZXMQQ2h1cmNoaWxsIEZvcmVzdAtDaWVsbyBWaXN0YRFDaXRpemVucyBvbiBBbGVydA1Db2xpc2V1bSBPYWtzFENvbGlzZXVtLVdpbGxvdyBQYXJrDkNvbGxpbnMgR2FyZGVuDkNvbG9uaWFsIEhpbGxzEkNvbWFuY2hlIENvbW11bml0eRlDb21tdW5pdHkgV29ya2VycyBDb3VuY2lsJkNvbW11bml0eSBXb3JrZXJzIENvdW5jaWwvTG9zIEphcmRpbmVzFENvdW50cnkgVmlldyBWaWxsYWdlJUNvdW50cnkgVmlldyBWaWxsYWdlL0FsYW1vIEZhcm1zdGVhZHMyQ291bnRyeSBWaWV3IFZpbGxhZ2UvQWxhbW8gRmFybXN0ZWFkcyBCYWJjb2NrIFJvYWQVQ291bnRyeXNpZGUgU2FuIFBlZHJvEUNyZWVrdmlldyBFc3RhdGVzDENyZXN0YSBCZWxsYQlDcmVzdGxha2UOQ3Jvd25oaWxsIFBhcmsmQ3Jvd25yaWRnZSBvZiBUZXhhcyBPd25lcnMgQXNzb2NpYXRpb24MQ3VsZWJyYSBQYXJrDEQgTWVhZG93IEhPQQtEZWVyIEhvbGxvdwlEZWVyZmllbGQORGVsbGNyZXN0IEFyZWENRGVsbHZpZXcgQXJlYQ5EZW52ZXIgSGVpZ2h0cw5EaWdub3dpdHkgSGlsbBFEb25hbGRzb24gVGVycmFjZQhEb3MgUmlvcxBEb3ZlIExhbmRpbmcgSE9BHkRvd250b3duIFJlc2lkZW50cyBBc3NvY2lhdGlvbh5EcmVhbWhpbGwgRXN0YXRlcyBOZWlnaGJvcmhvb2QMRWFnbGVzIEJsdWZmLEVhc3QgUHlyb24gLSBTeW1waG9ueSBMYW5lLyBNaXNzaW9uIFNhbiBKb3NlK0Vhc3QgUHlyb24gLSBTeW1waG9ueSBMYW5lL01pc3Npb24gU2FuIEpvc2UYRWFzdCBQeXJvbi9TeW1waG9ueSBMYW5lEkVhc3QgVGVycmVsbCBIaWxscwxFYXN0IFZpbGxhZ2UIRWFzdGdhdGUQRWFzdHdvb2QgVmlsbGFnZRBFY2toZXJ0IENyb3NzaW5nBEVkZW4GRWRpc29uG0VsIENoYXBhcnJhbCBGZXJ0aWxlIFZhbGxleQlFbCBEb3JhZG8KRWwgU2VuZGVybw5FbWVyYWxkIEZvcmVzdAxFbmNpbm8gQmx1ZmYQRW5jaW5vIENyZWVrIEhPQQtFbmNpbm8gUGFyaw1GZWF0aGVyIFJpZGdlCkZpZWxkc3RvbmULRml2ZSBQb2ludHMTRm9yZXN0IGF0IFN0b25lIE9hawxGb3Jlc3QgQ3Jlc3QKRm9yZXN0IE9haxhGb3NzaWwgU3ByaW5ncyBSYW5jaCBIT0EHRm94IFJ1biRGcmllbmRzIG9mIEZyaWVkcmljaCBXaWxkZXJuZXNzIFBhcmsKR2FyZGVuZGFsZQ9HZW5lcmFsIEtydWVnZXINR2lsbGV0dGUgQXJlYRhHb3Zlcm5tZW50IEhpbGwgQWxsaWFuY2UPR3JlYXQgTm9ydGh3ZXN0FUdyZWF0ZXIgSGFybW9ueSBIaWxscw5Hcmlzc29tIFRyYWlscxRHdWlsYmVhdSBHYXJkZW5zIEhPQQ1HdWlsYmVhdSBQYXJrD0hhcmxhbmRhbGUgUGFyaxhIYXJ2YXJkIFBsYWNlIC0gRWFzdGxhd24MSGVpbi1PcmNoYXJkCEhlcml0YWdlDUhpZGRlbiBNZWFkb3cPSGlnaGxhbmQgRm9yZXN0DkhpZ2hsYW5kIEhpbGxzDUhpZ2hsYW5kIFBhcmsJSGlsbGNyZXN0D0hpbGxzIGFuZCBEYWxlcxNIaWxscyBvZiBQYXJrIE5vcnRoCUhvdCBXZWxscw5IdW50ZXIncyBCcm9vaw5IdW50ZXIncyBDcmVlaxRIdW50ZXIncyBDcmVlayBOb3J0aBJIdW50ZXIncyBHbGVubiBQVUQNSHVudGVyJ3MgTWlsbA1IdW50ZXIncyBQb25kIkh1bnRlcuKAmXMgUG9uZCBWaWxsYWdlIEdyZWVuIEhPQSAnSHVudGVyw6LigqzihKJzIFBvbmQgVmlsbGFnZSBHcmVlbiBIT0EgDUh1bnRlcnMgQnJvb2sUSHVudGVycyBDaGFzZSBVbml0IDYNSHVudGVycyBDcmVlaxNIdW50ZXJzIENyZWVrIE5vcnRoDEh1bnRlcnMgTWlsbAxIdW50ZXJzIFBvbmQQSHVudGluZ3RvbiBQbGFjZSRIdW50bGVpZ2ggUGFyayBSZXNpZGVudHMgQXNzb2NpYXRpb24MSW5ncmFtIEhpbGxzEUluc3BpcmF0aW9uIEhpbGxzGElud29vZCBIb2xsb3cgSG9tZW93bmVycxNJcm9uIE1vdW50YWluIFJhbmNoCUphZGUgT2FrcwlKZWZmZXJzb24RSmVmZmVyc29uIEhlaWdodHMYSmVmZmVyc29uLyBXb29kbGF3biBMYWtlF0plZmZlcnNvbi9Xb29kbGF3biBMYWtlCkp1cGUgTWFub3IIS2V5c3RvbmUMS2luZyBXaWxsaWFtFEwuIFIuIExha2V2aWV3IFJhbmNoE0wuUi4gTGFrZXZpZXcgUmFuY2gQTGFja2xhbmQgVGVycmFjZSBMYWNrbGFuZCBUZXJyYWNlLyBDYWJsZS1XZXN0d29vZB9MYWNrbGFuZCBUZXJyYWNlL0NhYmxlLVdlc3R3b29kCExha2VzaWRlEUxhdXJhIEhlaWdodHMgSE9BDExhdXJlbCBIaWxscwZMYXZhY2EMTGVnZW5kIEhpbGxzIUxlZ2VuZCBIaWxscy8gQ3Jvd25yaWRnZSBvZiBUZXhhcyBMZWdlbmQgSGlsbHMvQ3Jvd25yaWRnZSBvZiBUZXhhcw1MaW5kc2V5IFBsYWNlIUxvbWEgQmVsbGEgSE9BLyBUaHVuZGVyYmlyZCBIaWxscyBMb21hIEJlbGxhIEhPQS9UaHVuZGVyYmlyZCBIaWxscwlMb21hIFBhcmsKTG9tYSBWaXN0YQ5Mb21hIFZpc3RhIEhPQQlMb25lIFN0YXIMTG9uZydzIENyZWVrC0xvbmdzIENyZWVrDUxvb2tvdXQgQmx1ZmYOTG9ycmVuY2UgQ3JlZWshTG9ycmVuY2UgQ3JlZWsgUHJlc2VydmF0aW9uIEFzc24uE0xvcyBBbmdlbGVzIEhlaWdodHMMTG9zIEphcmRpbmVzKUxvdCBPd25lcnMgQXNzb2NpYXRpb24gZm9yIFN1bmRhbmNlIFJhbmNoFExvd2VyIFNvdXRoZWFzdCBTaWRlDk1hY0FydGh1ciBQYXJrDE1haG5ja2UgUGFyaxNNYWlubGFuZCBTcXVhcmUgSE9BIU1hdmVyaWNrIE5laWdoYm9yaG9vZCBBc3NvY2lhdGlvbhdNZWFkb3cgUG9pbnRlIFRvd25ob21lcw5NZWFkb3cgVmlsbGFnZRBNZW1vcmlhbCBIZWlnaHRzC01lc2EgR3JhbmRlDk1lc2EgVmVyZGUgSE9BFE1pc3Npb24gRGVsIExhZ28gSE9BGk1pc3Npb24gUmVhY2ggSG90IFdlbGxzIE5BEE1pc3Npb24gU2FuIEpvc2UNTWlzc2lvbiBUcmFjZQpNaXN0eSBPYWtzEE1vY2tpbmdiaXJkIEhpbGwLTW9udGUgVmlzdGETTW9udGUgVmlzdGEgVGVycmFjZRVNb250ZXJyZXkgVmlsbGFnZSBIT0EPTW9udGljZWxsbyBQYXJrKk1vdW50YWluIFZpZXcgQWNyZXMgTmVpZ2hib3Job29kIENvYWxpdGlvbhJOb3J0aCBDYXN0bGUgSGlsbHMNTm9ydGggQ2VudHJhbBtOb3J0aCBDZW50cmFsIFRob3VzYW5kIE9ha3MXTm9ydGggU2FuIEFudG9uaW8gSGlsbHMTTm9ydGggU2hlYXJlciBIaWxscxBOb3J0aGVybiBIZWlnaHRzDk5vcnRoZXJuIEhpbGxzHk5vcnRoZXJuIEhpbGxzIENvdW50cnkgVmlsbGFnZQlOb3J0aG1vb3IgTm9ydGh3b29kIEhpbGxzIEltcHJvdmVtZW50IENsdWIJT2FrIENyZWVrEU9hayBHcm92ZSBFc3RhdGVzEU9hayBIYXZlbiBIZWlnaHRzCU9hayBIaWxscxJPYWsgSGlsbHMgQ2l0aXplbnMPT2FrIEhvbGxvdyBQYXJrCk9hayBNZWFkb3cUT2FrIFBhcmsgLSBOb3J0aHdvb2QKT2FrIFZhbGxleRxPYWtkZWxsIENvdW5jaWwgb2YgQ28tT3duZXJzDk9ha2hvbGxvdyBQYXJrD09ha2xhbmQgRXN0YXRlcw9PYWtsYW5kIEhlaWdodHMNT2FrbW9udCBEb3ducxFPYWt3ZWxsIEZhcm1zIEhPQQhPYWt3b29kIBJPbG1vcyBQYXJrIFRlcnJhY2URT3JzaW5nZXIgTGFuZSBIT0EFT3hib3cMUGFsbSBIZWlnaHRzC1BhcmsgRm9yZXN0ClBhcmsgUGxhY2UgUGFya2xhbmRzIEhvbWVvd25lcnMgQXNzb2NpYXRpb24jUGFybWFuIFBsYWNlIEhvbWVvd25lcnMgQXNzb2NpYXRpb24MUGVjYW4gVmFsbGV5J1BlY2FuIFZhbGxleSBQYXJrIEVzdGF0ZXMvIFBlY2FuIFZhbGxleSZQZWNhbiBWYWxsZXkgUGFyayBFc3RhdGVzL1BlY2FuIFZhbGxleQ5QZW1icm9rZSBGYXJtcx9QZW1icm9rZSBGYXJtcy9BbGFtbyBGYXJtc3RlYWQgK1BlbWJyb2tlIEZhcm1zL0FsYW1vIEZhcm1zdGVhZCBCYWJjb2NrIFJvYWQhUGVvcGxlIEFjdGl2ZSBpbiBDb21tdW5pdHkgRWZmb3J0C1BlcHBlcnJpZGdlDVBpcGVycyBNZWFkb3cIUHJlc2lkaW8VUHJvbW9udG9yeSBQb2ludGUgSE9BK1Byb3BlcnR5IE93bmVycyBvZiBSaWRnZXN0b25lIChTYW4gQW50b25pbykNUHJvc3BlY3QgSGlsbCVQcm9zcGVjdCBIaWxsL1dlc3QgRW5kIEhvcGUgaW4gQWN0aW9uEFByb3ZpbmNpYSBWaWxsYXMSUXVpbnRhbmEgQ29tbXVuaXR5DVJhaW5ib3cgSGlsbHMOUmFuZG9scGggSGlsbHMLUmFuZ2UgUmlkZXIJUmVkIFJvYmluD1JlZGxhbmQgRXN0YXRlcwxSZWRsYW5kIE9ha3MaUmVkbGFuZCBSYW5jaCBhdCBFbG0gQ3JlZWsOUmVkbGFuZCBSaWRnZSAPUmVkbGFuZCBTcHJpbmdzHVJlZ2VuY3kgUGxhY2UgUHJvcGVydHkgT3duZXJzD1JpZGdlIFN0b25lIEhPQRRSaWRnZWhhdmVuIFZvbHVudGVlcgpSaXZlciBSb2FkEFJvY2t3ZWxsIFZpbGxhZ2UPUm9sbGluZyBNZWFkb3dzFVJvbGxpbmcgUmlkZ2UgVmlsbGFnZQ5Sb29zZXZlbHQgUGFyawlSb3NlaGVhcnQLUm95YWwgUmlkZ2UZU2FuIEFudG9uaW8gT2FrIENyZXN0IEhPQRdTYW4gQW50b25pbyBRdWFpbCBSaWRnZR1TYW4gQW50b25pbyBSZW1pbmd0b24gSGVpZ2h0cxBTYW4gSnVhbiBHYXJkZW5zH1NhbiBKdWFuIEdhcmRlbnMvQ29sbGlucyBHYXJkZW4OU2NhdHRlcmVkIE9ha3MKU2hhZHkgT2Frcw5TaGF2YW5vIEZvcmVzdB9TaGF2YW5vIFBhcmsgVmlsbGFzIENvbmRvbWluaXVtEVNoYXZhbm8gUmlkZ2UgSE9BJFNoYXZhbm8gUm9nZXJzIFJhbmNoIENyb3NzdGltYmVyIEhPQSJTaGF2YW5vIFJvZ2VycyBSYW5jaCBGYWxsaW5nIEJyb29rGVNoZWFyZXIgSGlsbHMgLSBSaWRnZXZpZXcYU2hlbmFuZG9haC9WYW5jZSBKYWNrc29uRlNvbGFuYSBSaWRnZSBIb21lb3duZXJzIEFzc29jaWF0aW9uLyBQZW9wbGUgQWN0aXZlIGluIENvbW11bml0eSBFZmZvcnQrU291dGhlYXN0IENpdGl6ZW5zIENvbW1pdHRlZS8gSGlnaGxhbmQgUGFyaypTb3V0aGVhc3QgQ2l0aXplbnMgQ29tbWl0dGVlL0hpZ2hsYW5kIFBhcmsfU291dGh3ZXN0IENvbW11bml0eSBBc3NvY2lhdGlvbiJTcHJpbmcgQ3JlZWsgTmVpZ2hib3Job29kIEFsbGlhbmNlDVNwcmluZyBWaXN0YXMKU3ByaW5ndmFsZQtTdGFudG9uIFJ1bgxTdGVlcGxlYnJvb2suU3RlZXBsZWNoYXNlIENvbmRvbWluaXVtIEhvbWVvd25lciBBc3NvY2lhdGlvbg5TdGV1YmluZyBSYW5jaA5TdG9uZSBNb3VudGFpbilTdG9uZSBPYWsgQ29tbXVuaXRpZXMgb2YgTXV0dWFsIEFtZW5pdGllcxJTdG9uZSBPYWsgTWVhZG93cyAPU3RvbmUgT2FrIFBhcmtlDFN0b25lIFZhbGxleSBTdG9uZWdhdGUgSGlsbHMgYXQgV2VzdG92ZXIgSGlsbApTdW5yaXNlIE5BIFN1bnJpc2UgTmVpZ2hib3Job29kIEFzc29jaWF0aW9uEFN1bnNoaW5lIEVzdGF0ZXMKVGFuZ2xld29vZB1UYXJhIE5laWdoYm9yaG9vZCBBc3NvY2lhdGlvbg9UZXJyZWxsIEhlaWdodHMbVGhlIEFydGVzaWEgQ29tbXVuaXR5IEd1aWxkG1RoZSBCbHVmZnMgYXQgV2VzdGNoYXNlIEhPQR5UaGUgQnJpZGdlcyBDb25kbyBPd25lcnMgQXNzb2MMVGhlIERvbWluaW9uIVRoZSBFbmNsYXZlIGF0IFdlc3RvdmVyIEhpbGxzIEhPQRhUaGUgRXN0YXRlcyBhdCBTdG9uZWdhdGUaVGhlIEZvdW50YWlucyBhdCBEZWVyZmllbGQeVGhlIEdyZWF0ZXIgTWFyeW1vbnQgQXJlYSAoTkEpG1RoZSBIZWlnaHRzIGF0IFN0b25lIE9hayBJSRtUaGUgT2FrcyBvZiBWaXN0YSBEZWwgTm9ydGUxVGhlIE9ha3MgT3duZXJzIEFzc29jaWF0aW9uLyBPYWsgUGFyayAtIE5vcnRod29vZDBUaGUgT2FrcyBPd25lcnMgQXNzb2NpYXRpb24vT2FrIFBhcmsgLSBOb3J0aHdvb2QMVGhlIE92ZXJsb29rIFRoZSBSaWRnZSBIb21lIE93bmVyIEFzc29jaWF0aW9uJFRoZSBUb2JpbiBIaWxsIENvbW11bml0eSBBc3NvY2lhdGlvbhdUaGUgVG93ZXJzIE9uIFBhcmsgTGFuZTJUaGUgVG93bmhvbWVzIG9mIE5vcnRocGFyayBIb21lIE93bmVycyBBc3NvY2lhdGlvbjBUaGUgVG93bmhvbWVzIG9mIE5vcnRocGFyayBIb21lb3duZXIgQXNzb2NpYXRpb24VVGhlIFZpbGxhZ2UgYXQgSW53b29kGlRoZSBWaWxsYWdlIGF0IFJ1c3RpYyBPYWtzF1RoZSBXYXRlcnMgYXQgRGVlcmZpZWxkHFRoZSBXb29kbGFuZHMgb2YgQ2FtaW5vIFJlYWwUVGhlIFdvb2RzIG9mIFNoYXZhbm8hVGhvbXBzb24gTmVpZ2hib3Job29kIEFzc29jaWF0aW9uFFRob3VzYW5kIE9ha3MgRm9yZXN0KFRocnVzaCBWaWV3IEdhcmRlbnMvT2FrIFBhcmsgLSBOb3J0aHdvb2QRVGh1bmRlcmJpcmQgSGlsbHMMVGllcnJhIExpbmRhIFRvbXBzb24gTmVpZ2hib3Job29kIEFzc29jaWF0aW9uLFRvd25ob21lcyBvZiBOb3J0aHBhcmsgSG9tZW93bmVyIEFzc29jaWF0aW9uElVuaXRlZCBIb21lb3duZXJzIA9Vbml0ZWQgV2VzdHdvb2QcVW5pdGVkIFdlc3R3b29kIFJlc2lkZW50IE9yZx5Vbml0ZWQgV2VzdHdvb2QvQ2FibGUtV2VzdHdvb2QPVW5pdmVyc2l0eSBQYXJrCVVwdG93biBOQQhWYWxlbmNpYRRWYWxlbmNpYSBFbmNsYXZlIEhPQTBWYWxsZXkgRm9yZXN0LyBQZW9wbGUgQWN0aXZlIGluIENvbW11bml0eSBFZmZvcnQvVmFsbGV5IEZvcmVzdC9QZW9wbGUgQWN0aXZlIGluIENvbW11bml0eSBFZmZvcnQiVmFsbGV5IEZvcmdlIFJlc2lkZW50cyBBc3NvY2lhdGlvbg9WYWxsZXkgSGkgTm9ydGgNVmFuY2UgSmFja3NvbgtWZXJkZSBIaWxscw5WaWxsYSBDb3JvbmFkbydWaWxsYSBNb250ZSBWaXN0YSBDb25kbyBPQS8gTW9udGUgVmlzdGErVmlsbGEgVGFuZ2xld29vZCBDb25kbyBIT0EvIFRlcnJlbGwgSGVpZ2h0cylWaWxsYSBUYW5nbGV3b29kIENvbmRvIE9BL1RlcnJlbGwgSGVpZ2h0cxZWaWxsYWdlIGF0IEJpZyBDb3VudHJ5EVZpbGxhZ2UgTm9ydGggT25lFVZpbGxhZ2VzIG9mIFdlc3RjcmVlaxdWaWxsYXMgYXQgUmVkbGFuZCBSYW5jaBxWaWxsYXMgb2YgTm9ydGh3ZXN0IENyb3NzaW5nBVZpc3RhGVZXIEhvbWVvd25lcnMgQXNzb2NpYXRpb24jV2FsZGVuIE1lYWRvd3MvIENyb3ducmlkZ2Ugb2YgVGV4YXMLV2VsbHNwcmluZ3MXV2VzdCBFbmQgSG9wZSBpbiBBY3Rpb24JV2VzdGZpZWxkJ1dlc3RmaWVsZC9BbGFtbyBGYXJtc3RlYWRzIEJhYmNvY2sgUm9hZBFXZXN0Zm9ydCBBbGxpYW5jZRNXZXN0b3ZlciBGb3Jlc3QgSE9BD1dlc3R3b29kIFNxdWFyZRBXaGVhdGxleSBIZWlnaHRzHVdoZWF0bGV5IEhlaWdodHMgQWN0aW9uIEdyb3VwD1doaXNwZXJpbmcgT2Frcx5XaWxkd29vZCBSZXNpZGVudHMgQXNzb2NpYXRpb24NV2lsZHdvb2QgV2VzdAhXaWxzaGlyZRNXaWxzaGlyZSBWaWxsYWdlIE5BEFdpbmNoZXN0ZXIgSGlsbHMOV2luZHNvciBTcXVhcmUMV29sbGVyIENyZWVrDVdvb2RsYW5kIFBhcmsYV29vZGxhbmRzIG9mIENhbWlubyBSZWFsDldvb2RsYXduIEhpbGxzDVdvb2RsYXduIExha2UfV29vZHJpZGdlIENvbW11bml0eSBBc3NvY2lhdGlvbhBXb29kcyBvZiBTaGF2YW5vCVdvb2R0aG9ybhWJAwAPMTY1IEFzc29jaWF0aW9uLDc2MDAgQnJvYWR3YXkgQ29uZG8gT0EvIE9hayBQYXJrIC0gTm9ydGh3b29kKzc2MDAgQnJvYWR3YXkgQ29uZG8gT0EvT2FrIFBhcmsgLSBOb3J0aHdvb2QXQWJlIExpbmNvbG4gQXNzb2NpYXRpb24oQWJlIExpbmNvbG4gQXNzb2NpYXRpb24vQWxhbW8gRmFybXN0ZWFkIDVBYmUgTGluY29sbiBBc3NvY2lhdGlvbi9BbGFtbyBGYXJtc3RlYWRzIEJhYmNvY2sgUm9hZApBZGFtcyBIaWxsHUFsYW1vIEZhcm1zdGVhZHMgQmFiY29jayBSb2FkEUFsYW1vZG9tZSBHYXJkZW5zCkFsdGEgVmlzdGEnQXBwbGUgQ3JlZWsgUHJvcGVydHkgT3duZXJzIEFzc29jaWF0aW9uCUFyYm9yZXR1bQtBdWJ1cm4gT2FrcxFBdmVuaWRhIEd1YWRhbHVwZQ9CYXZhcmlhbiBGb3Jlc3QLQmVhY29uIEhpbGwbQmVsIE1lYWRlIEhvbWVzIEFzc29jaWF0aW9uD0JpdHRlcnMgRW5jbGF2ZRFCbGFuY28gQmx1ZmZzIEhPQQxCbG9zc29tIFBhcmsSQmx1ZSBSaWRnZSBFc3RhdGVzEUJsdWUgUm9jayBTcHJpbmdzGEJsdWZmdmlldyBhdCBDYW1pbm8gUmVhbAxCcmF1biBIb2xsb3cNQnJhdW4gT2FrcyBOQRJCcmF1biBTdGF0aW9uIEVhc3QSQnJhdW4gU3RhdGlvbiBXZXN0GUJyYXVuIFdpbGxvdyBVbml0IDIgYW5kIDQSQnJhdW4gV2lsbG93IFVuaXQyCkJyaWRnZXdvb2QJQnJvb2t3b29kC0JyeWNlIFBsYWNlF0JyeWNlIFBsYWNlIC8gQ2FtZWxvdCAxDkNhYmxlLVdlc3R3b29kH0NhYmxlLVdlc3R3b29kL0xhY2tsYW5kIFRlcnJhY2UOQ2FkaWxsYWMgRHJpdmUJQ2FtZWxvdCAxEUNhbWlubyBCYW5kZXJhIE5BEkNhbnRlcmEgVmlsbGFnZSBIQRRDYW55b24gQ3JlZWsgRXN0YXRlcxRDYW55b24gQ3JlZWsgVmlsbGFnZRBDYW55b24gUGFya2UgSE9BE0Nhc3RsZSBIaWxscyBGb3Jlc3QSQ2FzdGxlIFdvb2QgRm9yZXN0HkNlZGFyIFBvaW50IE93bmVycyBBc3NvY2lhdGlvbhtDZW50cmFsIExvcyBBbmdlbGVzIEhlaWdodHMYQ0YgQ29tbXVuaXR5IEFzc29jaWF0aW9uD0NoYW1waW9ucyBSaWRnZShDaGVycnkgSGlsbCBJLTEwICYgSG91c3RvbiBTdCAtIENvcnJpZG9yEUNodXJjaGlsbCBFc3RhdGVzEENodXJjaGlsbCBGb3Jlc3QLQ2llbG8gVmlzdGERQ2l0aXplbnMgb24gQWxlcnQNQ29saXNldW0gT2FrcxRDb2xpc2V1bS1XaWxsb3cgUGFyaw5Db2xsaW5zIEdhcmRlbg5Db2xvbmlhbCBIaWxscxJDb21hbmNoZSBDb21tdW5pdHkZQ29tbXVuaXR5IFdvcmtlcnMgQ291bmNpbCZDb21tdW5pdHkgV29ya2VycyBDb3VuY2lsL0xvcyBKYXJkaW5lcxRDb3VudHJ5IFZpZXcgVmlsbGFnZSVDb3VudHJ5IFZpZXcgVmlsbGFnZS9BbGFtbyBGYXJtc3RlYWRzMkNvdW50cnkgVmlldyBWaWxsYWdlL0FsYW1vIEZhcm1zdGVhZHMgQmFiY29jayBSb2FkFUNvdW50cnlzaWRlIFNhbiBQZWRybxFDcmVla3ZpZXcgRXN0YXRlcwxDcmVzdGEgQmVsbGEJQ3Jlc3RsYWtlDkNyb3duaGlsbCBQYXJrJkNyb3ducmlkZ2Ugb2YgVGV4YXMgT3duZXJzIEFzc29jaWF0aW9uDEN1bGVicmEgUGFyawxEIE1lYWRvdyBIT0ELRGVlciBIb2xsb3cJRGVlcmZpZWxkDkRlbGxjcmVzdCBBcmVhDURlbGx2aWV3IEFyZWEORGVudmVyIEhlaWdodHMORGlnbm93aXR5IEhpbGwRRG9uYWxkc29uIFRlcnJhY2UIRG9zIFJpb3MQRG92ZSBMYW5kaW5nIEhPQR5Eb3dudG93biBSZXNpZGVudHMgQXNzb2NpYXRpb24eRHJlYW1oaWxsIEVzdGF0ZXMgTmVpZ2hib3Job29kDEVhZ2xlcyBCbHVmZixFYXN0IFB5cm9uIC0gU3ltcGhvbnkgTGFuZS8gTWlzc2lvbiBTYW4gSm9zZStFYXN0IFB5cm9uIC0gU3ltcGhvbnkgTGFuZS9NaXNzaW9uIFNhbiBKb3NlGEVhc3QgUHlyb24vU3ltcGhvbnkgTGFuZRJFYXN0IFRlcnJlbGwgSGlsbHMMRWFzdCBWaWxsYWdlCEVhc3RnYXRlEEVhc3R3b29kIFZpbGxhZ2UQRWNraGVydCBDcm9zc2luZwRFZGVuBkVkaXNvbhtFbCBDaGFwYXJyYWwgRmVydGlsZSBWYWxsZXkJRWwgRG9yYWRvCkVsIFNlbmRlcm8ORW1lcmFsZCBGb3Jlc3QMRW5jaW5vIEJsdWZmEEVuY2lubyBDcmVlayBIT0ELRW5jaW5vIFBhcmsNRmVhdGhlciBSaWRnZQpGaWVsZHN0b25lC0ZpdmUgUG9pbnRzE0ZvcmVzdCBhdCBTdG9uZSBPYWsMRm9yZXN0IENyZXN0CkZvcmVzdCBPYWsYRm9zc2lsIFNwcmluZ3MgUmFuY2ggSE9BB0ZveCBSdW4kRnJpZW5kcyBvZiBGcmllZHJpY2ggV2lsZGVybmVzcyBQYXJrCkdhcmRlbmRhbGUPR2VuZXJhbCBLcnVlZ2VyDUdpbGxldHRlIEFyZWEYR292ZXJubWVudCBIaWxsIEFsbGlhbmNlD0dyZWF0IE5vcnRod2VzdBVHcmVhdGVyIEhhcm1vbnkgSGlsbHMOR3Jpc3NvbSBUcmFpbHMUR3VpbGJlYXUgR2FyZGVucyBIT0ENR3VpbGJlYXUgUGFyaw9IYXJsYW5kYWxlIFBhcmsYSGFydmFyZCBQbGFjZSAtIEVhc3RsYXduDEhlaW4tT3JjaGFyZAhIZXJpdGFnZQ1IaWRkZW4gTWVhZG93D0hpZ2hsYW5kIEZvcmVzdA5IaWdobGFuZCBIaWxscw1IaWdobGFuZCBQYXJrCUhpbGxjcmVzdA9IaWxscyBhbmQgRGFsZXMTSGlsbHMgb2YgUGFyayBOb3J0aAlIb3QgV2VsbHMOSHVudGVyJ3MgQnJvb2sOSHVudGVyJ3MgQ3JlZWsUSHVudGVyJ3MgQ3JlZWsgTm9ydGgSSHVudGVyJ3MgR2xlbm4gUFVEDUh1bnRlcidzIE1pbGwNSHVudGVyJ3MgUG9uZCJIdW50ZXLigJlzIFBvbmQgVmlsbGFnZSBHcmVlbiBIT0EgJ0h1bnRlcsOi4oKs4oSicyBQb25kIFZpbGxhZ2UgR3JlZW4gSE9BIA1IdW50ZXJzIEJyb29rFEh1bnRlcnMgQ2hhc2UgVW5pdCA2DUh1bnRlcnMgQ3JlZWsTSHVudGVycyBDcmVlayBOb3J0aAxIdW50ZXJzIE1pbGwMSHVudGVycyBQb25kEEh1bnRpbmd0b24gUGxhY2UkSHVudGxlaWdoIFBhcmsgUmVzaWRlbnRzIEFzc29jaWF0aW9uDEluZ3JhbSBIaWxscxFJbnNwaXJhdGlvbiBIaWxscxhJbndvb2QgSG9sbG93IEhvbWVvd25lcnMTSXJvbiBNb3VudGFpbiBSYW5jaAlKYWRlIE9ha3MJSmVmZmVyc29uEUplZmZlcnNvbiBIZWlnaHRzGEplZmZlcnNvbi8gV29vZGxhd24gTGFrZRdKZWZmZXJzb24vV29vZGxhd24gTGFrZQpKdXBlIE1hbm9yCEtleXN0b25lDEtpbmcgV2lsbGlhbRRMLiBSLiBMYWtldmlldyBSYW5jaBNMLlIuIExha2V2aWV3IFJhbmNoEExhY2tsYW5kIFRlcnJhY2UgTGFja2xhbmQgVGVycmFjZS8gQ2FibGUtV2VzdHdvb2QfTGFja2xhbmQgVGVycmFjZS9DYWJsZS1XZXN0d29vZAhMYWtlc2lkZRFMYXVyYSBIZWlnaHRzIEhPQQxMYXVyZWwgSGlsbHMGTGF2YWNhDExlZ2VuZCBIaWxscyFMZWdlbmQgSGlsbHMvIENyb3ducmlkZ2Ugb2YgVGV4YXMgTGVnZW5kIEhpbGxzL0Nyb3ducmlkZ2Ugb2YgVGV4YXMNTGluZHNleSBQbGFjZSFMb21hIEJlbGxhIEhPQS8gVGh1bmRlcmJpcmQgSGlsbHMgTG9tYSBCZWxsYSBIT0EvVGh1bmRlcmJpcmQgSGlsbHMJTG9tYSBQYXJrCkxvbWEgVmlzdGEOTG9tYSBWaXN0YSBIT0EJTG9uZSBTdGFyDExvbmcncyBDcmVlawtMb25ncyBDcmVlaw1Mb29rb3V0IEJsdWZmDkxvcnJlbmNlIENyZWVrIUxvcnJlbmNlIENyZWVrIFByZXNlcnZhdGlvbiBBc3NuLhNMb3MgQW5nZWxlcyBIZWlnaHRzDExvcyBKYXJkaW5lcylMb3QgT3duZXJzIEFzc29jaWF0aW9uIGZvciBTdW5kYW5jZSBSYW5jaBRMb3dlciBTb3V0aGVhc3QgU2lkZQ5NYWNBcnRodXIgUGFyawxNYWhuY2tlIFBhcmsTTWFpbmxhbmQgU3F1YXJlIEhPQSFNYXZlcmljayBOZWlnaGJvcmhvb2QgQXNzb2NpYXRpb24XTWVhZG93IFBvaW50ZSBUb3duaG9tZXMOTWVhZG93IFZpbGxhZ2UQTWVtb3JpYWwgSGVpZ2h0cwtNZXNhIEdyYW5kZQ5NZXNhIFZlcmRlIEhPQRRNaXNzaW9uIERlbCBMYWdvIEhPQRpNaXNzaW9uIFJlYWNoIEhvdCBXZWxscyBOQRBNaXNzaW9uIFNhbiBKb3NlDU1pc3Npb24gVHJhY2UKTWlzdHkgT2FrcxBNb2NraW5nYmlyZCBIaWxsC01vbnRlIFZpc3RhE01vbnRlIFZpc3RhIFRlcnJhY2UVTW9udGVycmV5IFZpbGxhZ2UgSE9BD01vbnRpY2VsbG8gUGFyaypNb3VudGFpbiBWaWV3IEFjcmVzIE5laWdoYm9yaG9vZCBDb2FsaXRpb24STm9ydGggQ2FzdGxlIEhpbGxzDU5vcnRoIENlbnRyYWwbTm9ydGggQ2VudHJhbCBUaG91c2FuZCBPYWtzF05vcnRoIFNhbiBBbnRvbmlvIEhpbGxzE05vcnRoIFNoZWFyZXIgSGlsbHMQTm9ydGhlcm4gSGVpZ2h0cw5Ob3J0aGVybiBIaWxscx5Ob3J0aGVybiBIaWxscyBDb3VudHJ5IFZpbGxhZ2UJTm9ydGhtb29yIE5vcnRod29vZCBIaWxscyBJbXByb3ZlbWVudCBDbHViCU9hayBDcmVlaxFPYWsgR3JvdmUgRXN0YXRlcxFPYWsgSGF2ZW4gSGVpZ2h0cwlPYWsgSGlsbHMST2FrIEhpbGxzIENpdGl6ZW5zD09hayBIb2xsb3cgUGFyawpPYWsgTWVhZG93FE9hayBQYXJrIC0gTm9ydGh3b29kCk9hayBWYWxsZXkcT2FrZGVsbCBDb3VuY2lsIG9mIENvLU93bmVycw5PYWtob2xsb3cgUGFyaw9PYWtsYW5kIEVzdGF0ZXMPT2FrbGFuZCBIZWlnaHRzDU9ha21vbnQgRG93bnMRT2Frd2VsbCBGYXJtcyBIT0EIT2Frd29vZCAST2xtb3MgUGFyayBUZXJyYWNlEU9yc2luZ2VyIExhbmUgSE9BBU94Ym93DFBhbG0gSGVpZ2h0cwtQYXJrIEZvcmVzdApQYXJrIFBsYWNlIFBhcmtsYW5kcyBIb21lb3duZXJzIEFzc29jaWF0aW9uI1Bhcm1hbiBQbGFjZSBIb21lb3duZXJzIEFzc29jaWF0aW9uDFBlY2FuIFZhbGxleSdQZWNhbiBWYWxsZXkgUGFyayBFc3RhdGVzLyBQZWNhbiBWYWxsZXkmUGVjYW4gVmFsbGV5IFBhcmsgRXN0YXRlcy9QZWNhbiBWYWxsZXkOUGVtYnJva2UgRmFybXMfUGVtYnJva2UgRmFybXMvQWxhbW8gRmFybXN0ZWFkICtQZW1icm9rZSBGYXJtcy9BbGFtbyBGYXJtc3RlYWQgQmFiY29jayBSb2FkIVBlb3BsZSBBY3RpdmUgaW4gQ29tbXVuaXR5IEVmZm9ydAtQZXBwZXJyaWRnZQ1QaXBlcnMgTWVhZG93CFByZXNpZGlvFVByb21vbnRvcnkgUG9pbnRlIEhPQStQcm9wZXJ0eSBPd25lcnMgb2YgUmlkZ2VzdG9uZSAoU2FuIEFudG9uaW8pDVByb3NwZWN0IEhpbGwlUHJvc3BlY3QgSGlsbC9XZXN0IEVuZCBIb3BlIGluIEFjdGlvbhBQcm92aW5jaWEgVmlsbGFzElF1aW50YW5hIENvbW11bml0eQ1SYWluYm93IEhpbGxzDlJhbmRvbHBoIEhpbGxzC1JhbmdlIFJpZGVyCVJlZCBSb2Jpbg9SZWRsYW5kIEVzdGF0ZXMMUmVkbGFuZCBPYWtzGlJlZGxhbmQgUmFuY2ggYXQgRWxtIENyZWVrDlJlZGxhbmQgUmlkZ2UgD1JlZGxhbmQgU3ByaW5ncx1SZWdlbmN5IFBsYWNlIFByb3BlcnR5IE93bmVycw9SaWRnZSBTdG9uZSBIT0EUUmlkZ2VoYXZlbiBWb2x1bnRlZXIKUml2ZXIgUm9hZBBSb2Nrd2VsbCBWaWxsYWdlD1JvbGxpbmcgTWVhZG93cxVSb2xsaW5nIFJpZGdlIFZpbGxhZ2UOUm9vc2V2ZWx0IFBhcmsJUm9zZWhlYXJ0C1JveWFsIFJpZGdlGVNhbiBBbnRvbmlvIE9hayBDcmVzdCBIT0EXU2FuIEFudG9uaW8gUXVhaWwgUmlkZ2UdU2FuIEFudG9uaW8gUmVtaW5ndG9uIEhlaWdodHMQU2FuIEp1YW4gR2FyZGVucx9TYW4gSnVhbiBHYXJkZW5zL0NvbGxpbnMgR2FyZGVuDlNjYXR0ZXJlZCBPYWtzClNoYWR5IE9ha3MOU2hhdmFubyBGb3Jlc3QfU2hhdmFubyBQYXJrIFZpbGxhcyBDb25kb21pbml1bRFTaGF2YW5vIFJpZGdlIEhPQSRTaGF2YW5vIFJvZ2VycyBSYW5jaCBDcm9zc3RpbWJlciBIT0EiU2hhdmFubyBSb2dlcnMgUmFuY2ggRmFsbGluZyBCcm9vaxlTaGVhcmVyIEhpbGxzIC0gUmlkZ2V2aWV3GFNoZW5hbmRvYWgvVmFuY2UgSmFja3NvbkZTb2xhbmEgUmlkZ2UgSG9tZW93bmVycyBBc3NvY2lhdGlvbi8gUGVvcGxlIEFjdGl2ZSBpbiBDb21tdW5pdHkgRWZmb3J0K1NvdXRoZWFzdCBDaXRpemVucyBDb21taXR0ZWUvIEhpZ2hsYW5kIFBhcmsqU291dGhlYXN0IENpdGl6ZW5zIENvbW1pdHRlZS9IaWdobGFuZCBQYXJrH1NvdXRod2VzdCBDb21tdW5pdHkgQXNzb2NpYXRpb24iU3ByaW5nIENyZWVrIE5laWdoYm9yaG9vZCBBbGxpYW5jZQ1TcHJpbmcgVmlzdGFzClNwcmluZ3ZhbGULU3RhbnRvbiBSdW4MU3RlZXBsZWJyb29rLlN0ZWVwbGVjaGFzZSBDb25kb21pbml1bSBIb21lb3duZXIgQXNzb2NpYXRpb24OU3RldWJpbmcgUmFuY2gOU3RvbmUgTW91bnRhaW4pU3RvbmUgT2FrIENvbW11bml0aWVzIG9mIE11dHVhbCBBbWVuaXRpZXMSU3RvbmUgT2FrIE1lYWRvd3MgD1N0b25lIE9hayBQYXJrZQxTdG9uZSBWYWxsZXkgU3RvbmVnYXRlIEhpbGxzIGF0IFdlc3RvdmVyIEhpbGwKU3VucmlzZSBOQSBTdW5yaXNlIE5laWdoYm9yaG9vZCBBc3NvY2lhdGlvbhBTdW5zaGluZSBFc3RhdGVzClRhbmdsZXdvb2QdVGFyYSBOZWlnaGJvcmhvb2QgQXNzb2NpYXRpb24PVGVycmVsbCBIZWlnaHRzG1RoZSBBcnRlc2lhIENvbW11bml0eSBHdWlsZBtUaGUgQmx1ZmZzIGF0IFdlc3RjaGFzZSBIT0EeVGhlIEJyaWRnZXMgQ29uZG8gT3duZXJzIEFzc29jDFRoZSBEb21pbmlvbiFUaGUgRW5jbGF2ZSBhdCBXZXN0b3ZlciBIaWxscyBIT0EYVGhlIEVzdGF0ZXMgYXQgU3RvbmVnYXRlGlRoZSBGb3VudGFpbnMgYXQgRGVlcmZpZWxkHlRoZSBHcmVhdGVyIE1hcnltb250IEFyZWEgKE5BKRtUaGUgSGVpZ2h0cyBhdCBTdG9uZSBPYWsgSUkbVGhlIE9ha3Mgb2YgVmlzdGEgRGVsIE5vcnRlMVRoZSBPYWtzIE93bmVycyBBc3NvY2lhdGlvbi8gT2FrIFBhcmsgLSBOb3J0aHdvb2QwVGhlIE9ha3MgT3duZXJzIEFzc29jaWF0aW9uL09hayBQYXJrIC0gTm9ydGh3b29kDFRoZSBPdmVybG9vayBUaGUgUmlkZ2UgSG9tZSBPd25lciBBc3NvY2lhdGlvbiRUaGUgVG9iaW4gSGlsbCBDb21tdW5pdHkgQXNzb2NpYXRpb24XVGhlIFRvd2VycyBPbiBQYXJrIExhbmUyVGhlIFRvd25ob21lcyBvZiBOb3J0aHBhcmsgSG9tZSBPd25lcnMgQXNzb2NpYXRpb24wVGhlIFRvd25ob21lcyBvZiBOb3J0aHBhcmsgSG9tZW93bmVyIEFzc29jaWF0aW9uFVRoZSBWaWxsYWdlIGF0IElud29vZBpUaGUgVmlsbGFnZSBhdCBSdXN0aWMgT2FrcxdUaGUgV2F0ZXJzIGF0IERlZXJmaWVsZBxUaGUgV29vZGxhbmRzIG9mIENhbWlubyBSZWFsFFRoZSBXb29kcyBvZiBTaGF2YW5vIVRob21wc29uIE5laWdoYm9yaG9vZCBBc3NvY2lhdGlvbhRUaG91c2FuZCBPYWtzIEZvcmVzdChUaHJ1c2ggVmlldyBHYXJkZW5zL09hayBQYXJrIC0gTm9ydGh3b29kEVRodW5kZXJiaXJkIEhpbGxzDFRpZXJyYSBMaW5kYSBUb21wc29uIE5laWdoYm9yaG9vZCBBc3NvY2lhdGlvbixUb3duaG9tZXMgb2YgTm9ydGhwYXJrIEhvbWVvd25lciBBc3NvY2lhdGlvbhJVbml0ZWQgSG9tZW93bmVycyAPVW5pdGVkIFdlc3R3b29kHFVuaXRlZCBXZXN0d29vZCBSZXNpZGVudCBPcmceVW5pdGVkIFdlc3R3b29kL0NhYmxlLVdlc3R3b29kD1VuaXZlcnNpdHkgUGFyawlVcHRvd24gTkEIVmFsZW5jaWEUVmFsZW5jaWEgRW5jbGF2ZSBIT0EwVmFsbGV5IEZvcmVzdC8gUGVvcGxlIEFjdGl2ZSBpbiBDb21tdW5pdHkgRWZmb3J0L1ZhbGxleSBGb3Jlc3QvUGVvcGxlIEFjdGl2ZSBpbiBDb21tdW5pdHkgRWZmb3J0IlZhbGxleSBGb3JnZSBSZXNpZGVudHMgQXNzb2NpYXRpb24PVmFsbGV5IEhpIE5vcnRoDVZhbmNlIEphY2tzb24LVmVyZGUgSGlsbHMOVmlsbGEgQ29yb25hZG8nVmlsbGEgTW9udGUgVmlzdGEgQ29uZG8gT0EvIE1vbnRlIFZpc3RhK1ZpbGxhIFRhbmdsZXdvb2QgQ29uZG8gSE9BLyBUZXJyZWxsIEhlaWdodHMpVmlsbGEgVGFuZ2xld29vZCBDb25kbyBPQS9UZXJyZWxsIEhlaWdodHMWVmlsbGFnZSBhdCBCaWcgQ291bnRyeRFWaWxsYWdlIE5vcnRoIE9uZRVWaWxsYWdlcyBvZiBXZXN0Y3JlZWsXVmlsbGFzIGF0IFJlZGxhbmQgUmFuY2gcVmlsbGFzIG9mIE5vcnRod2VzdCBDcm9zc2luZwVWaXN0YRlWVyBIb21lb3duZXJzIEFzc29jaWF0aW9uI1dhbGRlbiBNZWFkb3dzLyBDcm93bnJpZGdlIG9mIFRleGFzC1dlbGxzcHJpbmdzF1dlc3QgRW5kIEhvcGUgaW4gQWN0aW9uCVdlc3RmaWVsZCdXZXN0ZmllbGQvQWxhbW8gRmFybXN0ZWFkcyBCYWJjb2NrIFJvYWQRV2VzdGZvcnQgQWxsaWFuY2UTV2VzdG92ZXIgRm9yZXN0IEhPQQ9XZXN0d29vZCBTcXVhcmUQV2hlYXRsZXkgSGVpZ2h0cx1XaGVhdGxleSBIZWlnaHRzIEFjdGlvbiBHcm91cA9XaGlzcGVyaW5nIE9ha3MeV2lsZHdvb2QgUmVzaWRlbnRzIEFzc29jaWF0aW9uDVdpbGR3b29kIFdlc3QIV2lsc2hpcmUTV2lsc2hpcmUgVmlsbGFnZSBOQRBXaW5jaGVzdGVyIEhpbGxzDldpbmRzb3IgU3F1YXJlDFdvbGxlciBDcmVlaw1Xb29kbGFuZCBQYXJrGFdvb2RsYW5kcyBvZiBDYW1pbm8gUmVhbA5Xb29kbGF3biBIaWxscw1Xb29kbGF3biBMYWtlH1dvb2RyaWRnZSBDb21tdW5pdHkgQXNzb2NpYXRpb24QV29vZHMgb2YgU2hhdmFubwlXb29kdGhvcm4UKwOJA2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZxYAFgICAQ8QZGQWAGQYAQUeX19Db250cm9sc1JlcXVpcmVQb3N0QmFja0tleV9fFgEFBmNieEhPQcuR3wEoZQmLeA3eCSP8Et5DBDx7" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/PoliceCalls/WebResource.axd?d=-b9IMN-BP9QQpYsosSxmF-81PVTJPuY99WeI5C4x_mX6kT0LkDhr3CXMHw28_idUHZfDAhBfpNT68pVtxH_cAp07zxk1&amp;t=636284453597151108" type="text/javascript"></script>
+
+
+<script src="/PoliceCalls/ScriptResource.axd?d=d-VDYgULV_qW5WSxDMK7-rv3PXX3gmOK-TcuywlstdBSEEdNGPVRK9XDctAGbYAv7RbJejRYUACGmkTf3LSkSFfkqlhiA6XOZlKYLC_-miNvZLkWrwGiS4yUCf_EDhPYqjPhjeOLWMgmfCzzxZUWPIMe2Fc1&amp;t=477a62c1" type="text/javascript"></script>
+<script src="/PoliceCalls/ScriptResource.axd?d=BG_4Phx6Ppm5kZTl3lc0ZPI6URa5icpufdi5fCGxreKhubPDY8ZX9I8hRa3PYUy11vBXaQ4-H3UpbpI5eb3lybSEeTAjLhDGJgCG1fhq4gVN1Bjo0&amp;t=78f0a2d1" type="text/javascript"></script>
+<script src="/PoliceCalls/ScriptResource.axd?d=-UX604P2BxwO8ZxI94yIyW1-KHAUqWJfyS3TGrXgNGAu9J5wFdxbeSp4h9oOFLzPYZQLEJyYgp7YUj_9PyTX3dZIgixMZgpuj5Dp26ESuizSFJTVlO92BkxTY55BqyArUtaIWg2&amp;t=78f0a2d1" type="text/javascript"></script>
+<script src="/policecalls/Reports.aspx?_TSM_HiddenField_=ToolkitScriptManager1_HiddenField&amp;_TSM_CombinedScripts_=%3b%3bAjaxControlToolkit%2c+Version%3d3.5.60623.0%2c+Culture%3dneutral%2c+PublicKeyToken%3d28f01b0e84b6d53e%3aen-US%3a834c499a-b613-438c-a778-d32ab4976134%3af9cec9bc%3ade1feab2%3af2c8e708%3a720a52bf%3a589eaa30%3a698129cf%3ad9d4bb33%3afcf0e993%3afb9b4c57%3accb96cf9" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+</script>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="74C47CFF" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWMQKT4OK8DALE2qDWDwKS3diOCgKR38eBCwL+yJXfCQLL3dzWAwLChrRGAtzms7gMAvzzhsAEAoz497QMAte99+QBAr3W24kCAve6tbcEAvr2hLcLAur2hLcLAvX2hLcLAvT2hLcLAvf2hLcLAvb2hLcLAvH2hLcLAvD2hLcLAvP2hLcLAuL2hLcLAu32hLcLAvX2xLQLAvrHlukEAvqovIcIAu6k9YkIArPiw+EHAu7Ph/4KAu2gqZcDAv+rqg8Cs+CSggcC2+/j1A0C3Ib34gQCq+vc3A8Cs4j5tA4ChbfbigcCgrrVsAkCicXwhwkC9Zqh4g8C0Iic7QcC9KTg2gwCzvi55AQC7cT1ngQCwZT6sAMC2IWQFAKln/PuCgKgt7D9ClWhthBcEL2cin8T1FBKRYwg5+bt" />
+</div>
+    <div align="center">
+<script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ToolkitScriptManager1', document.getElementById('form1'));
+Sys.WebForms.PageRequestManager.getInstance()._updateControls([], [], [], 90);
+//]]>
+</script>
+
+
+
+
+
+
+        <table class="bold" >
+        <tr><td align="left" width="45%"><a href="Default.aspx" style="font-weight:bold;" >GO TO CALLS FOR SERVICE</a></td>
+            <td align="right" width="45%" style="text-align:right;font-weight:bold"><a href="FAQ.aspx#map" >Help</a></td>
+        </tr>
+        <tr><td colspan="2"><p><strong>PLEASE NOTE:</strong>  Use this tool to return a list of Police calls for service: a list of the "calls for service" or "dispatched police calls" reflecting each time someone called the police for service. These are CALLS FOR SERVICE, NOT Lists of Neighborhood Crimes or Crime Reports.
+            <br /><br />Calls are titled as they are called in and dispatched. For example, a call may be dispatched as a "robbery", as called in by a citizen, but later the officer finds it is a "burglary." This would be listed in the Calls for Service report as a "robbery".  Calls for Service data is available for 01/31/2011 through the end of last month.
+            </p></td></tr>
+        <tr><td colspan="2"></td></tr>
+        
+        <tr><td class="bold" >Start Date (mm/dd/yyyy):</td>
+            <td class="bold">
+                <input name="txtStart" type="text" onchange="javascript:setTimeout('__doPostBack(\'txtStart\',\'\')', 0)" onkeypress="if (WebForm_TextBoxKeyHandler(event) == false) return false;" id="txtStart" />
+                
+                <span id="txtStartValidator" style="color:Red;display:none;">Please select/enter a Start Date.  </span>  
+                
+                
+                <span id="txtStartRangeValidator" style="color:Red;visibility:hidden;"></span>
+            </td>
+        </tr>
+        <tr><td class="bold">End Date (mm/dd/yyyy):</td>
+            <td>
+                <table id="rdbSearchRange" border="0">
+	<tr>
+		<td><input id="rdbSearchRange_0" type="radio" name="rdbSearchRange" value="day" onclick="javascript:setTimeout('__doPostBack(\'rdbSearchRange$0\',\'\')', 0)" /><label for="rdbSearchRange_0">Day</label></td><td><input id="rdbSearchRange_1" type="radio" name="rdbSearchRange" value="week" onclick="javascript:setTimeout('__doPostBack(\'rdbSearchRange$1\',\'\')', 0)" /><label for="rdbSearchRange_1">Week</label></td><td><input id="rdbSearchRange_2" type="radio" name="rdbSearchRange" value="month" onclick="javascript:setTimeout('__doPostBack(\'rdbSearchRange$2\',\'\')', 0)" /><label for="rdbSearchRange_2">Month</label></td>
+	</tr>
+</table>
+                <input name="txtEndDate" type="text" id="txtEndDate" />
+                <span id="rdbSearchRange_CustomValidator" style="color:Red;display:none;">Please enter Start Date</span>
+                &nbsp;
+                
+                <span id="txtEndDate_RequiredFieldValidator" style="color:Red;display:none;">Please enter an End Date or select range.  </span>
+                &nbsp;
+                <span id="txtEndDate_RegularExpressionValidator" style="color:Red;display:none;">Please enter date in format MM/DD/YYYY</span>
+                </td>
+        </tr>
+        <tr><td class="bold">FILTER CALLS BY AT LEAST ONE</td>
+        </tr>    
+        <tr><td class="bold">Zipcode:</td>
+            <td><input name="txtZipcode" type="text" id="txtZipcode" />
+                <span id="zipcodeCustom" style="color:Red;display:none;">Provide at least one additional search criteria</span>
+                <span id="txtZipcode_RegularExpressionValidator" style="color:Red;visibility:hidden;">Please enter a well formatted zipcode: ##### or #####-####</span>
+
+            </td>          
+        </tr>
+        <tr><td class="bold">Dispatch Problem Category:</td>
+                <td><select name="ddlCategory" id="ddlCategory">
+	<option value="ALL "> </option>
+	<option value="Crimes Against Person Calls">Crimes Against Person Calls</option>
+	<option value="Property Crime Calls">Property Crime Calls</option>
+	<option value="Traffic Calls">Traffic Calls</option>
+	<option value="Other Calls">Other Calls</option>
+
+</select></td>
+        </tr>
+        <tr><td class="bold">Council District:</td>
+               <td><select name="ddlCouncilDistrict" id="ddlCouncilDistrict">
+	<option value=" "> </option>
+	<option value="0">Outside Area</option>
+	<option value="1">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+	<option value="4">4</option>
+	<option value="5">5</option>
+	<option value="6">6</option>
+	<option value="7">7</option>
+	<option value="8">8</option>
+	<option value="9">9</option>
+	<option value="10">10</option>
+
+</select>
+                </td>        
+            </tr>
+        <tr><td class="bold">School District:</td>
+                <td><select name="ddlSchoolDistrict" onchange="javascript:setTimeout('__doPostBack(\'ddlSchoolDistrict\',\'\')', 0)" id="ddlSchoolDistrict">
+	<option value=" "> </option>
+	<option value="Alamo Height ISD">Alamo Heights ISD</option>
+	<option value="Boerne ISD">Boerne ISD</option>
+	<option value="Comal ISD">Comal ISD</option>
+	<option value="East Central ISD">East Central ISD</option>
+	<option value="Edgewood ISD">Edgewood ISD</option>
+	<option value="Fort Sam">Fort Sam</option>
+	<option value="Harlandale ISD">Harlandale ISD</option>
+	<option value="Judson ISD">Judson ISD</option>
+	<option value="Lackland">Lackland</option>
+	<option value="Medina Valley ISD">Medina Valley ISD</option>
+	<option value="North East ISD">North East ISD</option>
+	<option value="North Side ISD">North Side ISD</option>
+	<option value="San Antonio ISD">San Antonio ISD</option>
+	<option value="Schertz-Cibolo ISD">Schertz-Cibolo ISD</option>
+	<option value="Somerset ISD">Somerset ISD</option>
+	<option value="South San ISD">South San ISD</option>
+	<option value="South Side ISD">South Side ISD</option>
+	<option value="South West ISD">South West ISD</option>
+
+</select>
+                </td>
+        </tr>
+        <tr><td class="bold">Homeowner Association:</td>
+            <td><div id="cbxHOA" style="display:inline-block;">
+	<table id="cbxHOA_cbxHOA_Table" class="ajax__combobox_inputcontainer" cellspacing="0" cellpadding="0" border="0" style="border-width:0px;border-style:None;border-collapse:collapse;display:inline-block;position:relative;top:5px;">
+		<tr>
+			<td class="ajax__combobox_textboxcontainer"><input name="cbxHOA$cbxHOA_TextBox" type="text" id="cbxHOA_cbxHOA_TextBox" autocomplete="off" style="width:160px;" /></td><td class="ajax__combobox_buttoncontainer"><button id="cbxHOA_cbxHOA_Button" type="button"></button></td>
+		</tr>
+	</table><ul id="cbxHOA_cbxHOA_OptionList" class="ajax__combobox_itemlist" style="display:none;visibility:hidden;">
+		<li></li><li>165 Association</li><li>7600 Broadway Condo OA/ Oak Park - Northwood</li><li>7600 Broadway Condo OA/Oak Park - Northwood</li><li>Abe Lincoln Association</li><li>Abe Lincoln Association/Alamo Farmstead </li><li>Abe Lincoln Association/Alamo Farmsteads Babcock Road</li><li>Adams Hill</li><li>Alamo Farmsteads Babcock Road</li><li>Alamodome Gardens</li><li>Alta Vista</li><li>Apple Creek Property Owners Association</li><li>Arboretum</li><li>Auburn Oaks</li><li>Avenida Guadalupe</li><li>Bavarian Forest</li><li>Beacon Hill</li><li>Bel Meade Homes Association</li><li>Bitters Enclave</li><li>Blanco Bluffs HOA</li><li>Blossom Park</li><li>Blue Ridge Estates</li><li>Blue Rock Springs</li><li>Bluffview at Camino Real</li><li>Braun Hollow</li><li>Braun Oaks NA</li><li>Braun Station East</li><li>Braun Station West</li><li>Braun Willow Unit 2 and 4</li><li>Braun Willow Unit2</li><li>Bridgewood</li><li>Brookwood</li><li>Bryce Place</li><li>Bryce Place / Camelot 1</li><li>Cable-Westwood</li><li>Cable-Westwood/Lackland Terrace</li><li>Cadillac Drive</li><li>Camelot 1</li><li>Camino Bandera NA</li><li>Cantera Village HA</li><li>Canyon Creek Estates</li><li>Canyon Creek Village</li><li>Canyon Parke HOA</li><li>Castle Hills Forest</li><li>Castle Wood Forest</li><li>Cedar Point Owners Association</li><li>Central Los Angeles Heights</li><li>CF Community Association</li><li>Champions Ridge</li><li>Cherry Hill I-10 &amp; Houston St - Corridor</li><li>Churchill Estates</li><li>Churchill Forest</li><li>Cielo Vista</li><li>Citizens on Alert</li><li>Coliseum Oaks</li><li>Coliseum-Willow Park</li><li>Collins Garden</li><li>Colonial Hills</li><li>Comanche Community</li><li>Community Workers Council</li><li>Community Workers Council/Los Jardines</li><li>Country View Village</li><li>Country View Village/Alamo Farmsteads</li><li>Country View Village/Alamo Farmsteads Babcock Road</li><li>Countryside San Pedro</li><li>Creekview Estates</li><li>Cresta Bella</li><li>Crestlake</li><li>Crownhill Park</li><li>Crownridge of Texas Owners Association</li><li>Culebra Park</li><li>D Meadow HOA</li><li>Deer Hollow</li><li>Deerfield</li><li>Dellcrest Area</li><li>Dellview Area</li><li>Denver Heights</li><li>Dignowity Hill</li><li>Donaldson Terrace</li><li>Dos Rios</li><li>Dove Landing HOA</li><li>Downtown Residents Association</li><li>Dreamhill Estates Neighborhood</li><li>Eagles Bluff</li><li>East Pyron - Symphony Lane/ Mission San Jose</li><li>East Pyron - Symphony Lane/Mission San Jose</li><li>East Pyron/Symphony Lane</li><li>East Terrell Hills</li><li>East Village</li><li>Eastgate</li><li>Eastwood Village</li><li>Eckhert Crossing</li><li>Eden</li><li>Edison</li><li>El Chaparral Fertile Valley</li><li>El Dorado</li><li>El Sendero</li><li>Emerald Forest</li><li>Encino Bluff</li><li>Encino Creek HOA</li><li>Encino Park</li><li>Feather Ridge</li><li>Fieldstone</li><li>Five Points</li><li>Forest at Stone Oak</li><li>Forest Crest</li><li>Forest Oak</li><li>Fossil Springs Ranch HOA</li><li>Fox Run</li><li>Friends of Friedrich Wilderness Park</li><li>Gardendale</li><li>General Krueger</li><li>Gillette Area</li><li>Government Hill Alliance</li><li>Great Northwest</li><li>Greater Harmony Hills</li><li>Grissom Trails</li><li>Guilbeau Gardens HOA</li><li>Guilbeau Park</li><li>Harlandale Park</li><li>Harvard Place - Eastlawn</li><li>Hein-Orchard</li><li>Heritage</li><li>Hidden Meadow</li><li>Highland Forest</li><li>Highland Hills</li><li>Highland Park</li><li>Hillcrest</li><li>Hills and Dales</li><li>Hills of Park North</li><li>Hot Wells</li><li>Hunter's Brook</li><li>Hunter's Creek</li><li>Hunter's Creek North</li><li>Hunter's Glenn PUD</li><li>Hunter's Mill</li><li>Hunter's Pond</li><li>Hunter’s Pond Village Green HOA </li><li>Hunter&#226;€™s Pond Village Green HOA </li><li>Hunters Brook</li><li>Hunters Chase Unit 6</li><li>Hunters Creek</li><li>Hunters Creek North</li><li>Hunters Mill</li><li>Hunters Pond</li><li>Huntington Place</li><li>Huntleigh Park Residents Association</li><li>Ingram Hills</li><li>Inspiration Hills</li><li>Inwood Hollow Homeowners</li><li>Iron Mountain Ranch</li><li>Jade Oaks</li><li>Jefferson</li><li>Jefferson Heights</li><li>Jefferson/ Woodlawn Lake</li><li>Jefferson/Woodlawn Lake</li><li>Jupe Manor</li><li>Keystone</li><li>King William</li><li>L. R. Lakeview Ranch</li><li>L.R. Lakeview Ranch</li><li>Lackland Terrace</li><li>Lackland Terrace/ Cable-Westwood</li><li>Lackland Terrace/Cable-Westwood</li><li>Lakeside</li><li>Laura Heights HOA</li><li>Laurel Hills</li><li>Lavaca</li><li>Legend Hills</li><li>Legend Hills/ Crownridge of Texas</li><li>Legend Hills/Crownridge of Texas</li><li>Lindsey Place</li><li>Loma Bella HOA/ Thunderbird Hills</li><li>Loma Bella HOA/Thunderbird Hills</li><li>Loma Park</li><li>Loma Vista</li><li>Loma Vista HOA</li><li>Lone Star</li><li>Long's Creek</li><li>Longs Creek</li><li>Lookout Bluff</li><li>Lorrence Creek</li><li>Lorrence Creek Preservation Assn.</li><li>Los Angeles Heights</li><li>Los Jardines</li><li>Lot Owners Association for Sundance Ranch</li><li>Lower Southeast Side</li><li>MacArthur Park</li><li>Mahncke Park</li><li>Mainland Square HOA</li><li>Maverick Neighborhood Association</li><li>Meadow Pointe Townhomes</li><li>Meadow Village</li><li>Memorial Heights</li><li>Mesa Grande</li><li>Mesa Verde HOA</li><li>Mission Del Lago HOA</li><li>Mission Reach Hot Wells NA</li><li>Mission San Jose</li><li>Mission Trace</li><li>Misty Oaks</li><li>Mockingbird Hill</li><li>Monte Vista</li><li>Monte Vista Terrace</li><li>Monterrey Village HOA</li><li>Monticello Park</li><li>Mountain View Acres Neighborhood Coalition</li><li>North Castle Hills</li><li>North Central</li><li>North Central Thousand Oaks</li><li>North San Antonio Hills</li><li>North Shearer Hills</li><li>Northern Heights</li><li>Northern Hills</li><li>Northern Hills Country Village</li><li>Northmoor</li><li>Northwood Hills Improvement Club</li><li>Oak Creek</li><li>Oak Grove Estates</li><li>Oak Haven Heights</li><li>Oak Hills</li><li>Oak Hills Citizens</li><li>Oak Hollow Park</li><li>Oak Meadow</li><li>Oak Park - Northwood</li><li>Oak Valley</li><li>Oakdell Council of Co-Owners</li><li>Oakhollow Park</li><li>Oakland Estates</li><li>Oakland Heights</li><li>Oakmont Downs</li><li>Oakwell Farms HOA</li><li>Oakwood </li><li>Olmos Park Terrace</li><li>Orsinger Lane HOA</li><li>Oxbow</li><li>Palm Heights</li><li>Park Forest</li><li>Park Place</li><li>Parklands Homeowners Association</li><li>Parman Place Homeowners Association</li><li>Pecan Valley</li><li>Pecan Valley Park Estates/ Pecan Valley</li><li>Pecan Valley Park Estates/Pecan Valley</li><li>Pembroke Farms</li><li>Pembroke Farms/Alamo Farmstead </li><li>Pembroke Farms/Alamo Farmstead Babcock Road</li><li>People Active in Community Effort</li><li>Pepperridge</li><li>Pipers Meadow</li><li>Presidio</li><li>Promontory Pointe HOA</li><li>Property Owners of Ridgestone (San Antonio)</li><li>Prospect Hill</li><li>Prospect Hill/West End Hope in Action</li><li>Provincia Villas</li><li>Quintana Community</li><li>Rainbow Hills</li><li>Randolph Hills</li><li>Range Rider</li><li>Red Robin</li><li>Redland Estates</li><li>Redland Oaks</li><li>Redland Ranch at Elm Creek</li><li>Redland Ridge </li><li>Redland Springs</li><li>Regency Place Property Owners</li><li>Ridge Stone HOA</li><li>Ridgehaven Volunteer</li><li>River Road</li><li>Rockwell Village</li><li>Rolling Meadows</li><li>Rolling Ridge Village</li><li>Roosevelt Park</li><li>Roseheart</li><li>Royal Ridge</li><li>San Antonio Oak Crest HOA</li><li>San Antonio Quail Ridge</li><li>San Antonio Remington Heights</li><li>San Juan Gardens</li><li>San Juan Gardens/Collins Garden</li><li>Scattered Oaks</li><li>Shady Oaks</li><li>Shavano Forest</li><li>Shavano Park Villas Condominium</li><li>Shavano Ridge HOA</li><li>Shavano Rogers Ranch Crosstimber HOA</li><li>Shavano Rogers Ranch Falling Brook</li><li>Shearer Hills - Ridgeview</li><li>Shenandoah/Vance Jackson</li><li>Solana Ridge Homeowners Association/ People Active in Community Effort</li><li>Southeast Citizens Committee/ Highland Park</li><li>Southeast Citizens Committee/Highland Park</li><li>Southwest Community Association</li><li>Spring Creek Neighborhood Alliance</li><li>Spring Vistas</li><li>Springvale</li><li>Stanton Run</li><li>Steeplebrook</li><li>Steeplechase Condominium Homeowner Association</li><li>Steubing Ranch</li><li>Stone Mountain</li><li>Stone Oak Communities of Mutual Amenities</li><li>Stone Oak Meadows </li><li>Stone Oak Parke</li><li>Stone Valley</li><li>Stonegate Hills at Westover Hill</li><li>Sunrise NA</li><li>Sunrise Neighborhood Association</li><li>Sunshine Estates</li><li>Tanglewood</li><li>Tara Neighborhood Association</li><li>Terrell Heights</li><li>The Artesia Community Guild</li><li>The Bluffs at Westchase HOA</li><li>The Bridges Condo Owners Assoc</li><li>The Dominion</li><li>The Enclave at Westover Hills HOA</li><li>The Estates at Stonegate</li><li>The Fountains at Deerfield</li><li>The Greater Marymont Area (NA)</li><li>The Heights at Stone Oak II</li><li>The Oaks of Vista Del Norte</li><li>The Oaks Owners Association/ Oak Park - Northwood</li><li>The Oaks Owners Association/Oak Park - Northwood</li><li>The Overlook</li><li>The Ridge Home Owner Association</li><li>The Tobin Hill Community Association</li><li>The Towers On Park Lane</li><li>The Townhomes of Northpark Home Owners Association</li><li>The Townhomes of Northpark Homeowner Association</li><li>The Village at Inwood</li><li>The Village at Rustic Oaks</li><li>The Waters at Deerfield</li><li>The Woodlands of Camino Real</li><li>The Woods of Shavano</li><li>Thompson Neighborhood Association</li><li>Thousand Oaks Forest</li><li>Thrush View Gardens/Oak Park - Northwood</li><li>Thunderbird Hills</li><li>Tierra Linda</li><li>Tompson Neighborhood Association</li><li>Townhomes of Northpark Homeowner Association</li><li>United Homeowners </li><li>United Westwood</li><li>United Westwood Resident Org</li><li>United Westwood/Cable-Westwood</li><li>University Park</li><li>Uptown NA</li><li>Valencia</li><li>Valencia Enclave HOA</li><li>Valley Forest/ People Active in Community Effort</li><li>Valley Forest/People Active in Community Effort</li><li>Valley Forge Residents Association</li><li>Valley Hi North</li><li>Vance Jackson</li><li>Verde Hills</li><li>Villa Coronado</li><li>Villa Monte Vista Condo OA/ Monte Vista</li><li>Villa Tanglewood Condo HOA/ Terrell Heights</li><li>Villa Tanglewood Condo OA/Terrell Heights</li><li>Village at Big Country</li><li>Village North One</li><li>Villages of Westcreek</li><li>Villas at Redland Ranch</li><li>Villas of Northwest Crossing</li><li>Vista</li><li>VW Homeowners Association</li><li>Walden Meadows/ Crownridge of Texas</li><li>Wellsprings</li><li>West End Hope in Action</li><li>Westfield</li><li>Westfield/Alamo Farmsteads Babcock Road</li><li>Westfort Alliance</li><li>Westover Forest HOA</li><li>Westwood Square</li><li>Wheatley Heights</li><li>Wheatley Heights Action Group</li><li>Whispering Oaks</li><li>Wildwood Residents Association</li><li>Wildwood West</li><li>Wilshire</li><li>Wilshire Village NA</li><li>Winchester Hills</li><li>Windsor Square</li><li>Woller Creek</li><li>Woodland Park</li><li>Woodlands of Camino Real</li><li>Woodlawn Hills</li><li>Woodlawn Lake</li><li>Woodridge Community Association</li><li>Woods of Shavano</li><li>Woodthorn</li>
+	</ul><input type="hidden" name="cbxHOA$cbxHOA_HiddenField" id="cbxHOA_cbxHOA_HiddenField" value="-1" />
+</div>           
+           </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="padding-top:10px"><a href="FAQ.aspx#hoa">Homeowner Association not listed?</a></td>
+        </tr>
+        <tr align="right">
+            <td colspan="2">
+                <input type="submit" name="btnSearch" value="View Data" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;btnSearch&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="btnSearch" style="font-family:Verdana;" />
+                &nbsp;&nbsp;
+                <input type="submit" name="btnReset" value="New Search" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;btnReset&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="btnReset" style="font-family:Verdana;" />
+            </td>
+        </tr>
+        <tr><td colspan="2" style="padding-top:10px"><br /><a href="Map.aspx"><img src= "images/MapIt3.png" alt="Map It!"  style="border:0"/></a></td>
+        </tr>
+    </table> 
+
+
+
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var Page_Validators =  new Array(document.getElementById("txtStartValidator"), document.getElementById("txtStartRangeValidator"), document.getElementById("rdbSearchRange_CustomValidator"), document.getElementById("txtEndDate_RequiredFieldValidator"), document.getElementById("txtEndDate_RegularExpressionValidator"), document.getElementById("zipcodeCustom"), document.getElementById("txtZipcode_RegularExpressionValidator"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var txtStartValidator = document.all ? document.all["txtStartValidator"] : document.getElementById("txtStartValidator");
+txtStartValidator.controltovalidate = "txtStart";
+txtStartValidator.errormessage = "Please select/enter a Start Date.  ";
+txtStartValidator.display = "Dynamic";
+txtStartValidator.validationGroup = "myDateValidators";
+txtStartValidator.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+txtStartValidator.initialvalue = "";
+var txtStartRangeValidator = document.all ? document.all["txtStartRangeValidator"] : document.getElementById("txtStartRangeValidator");
+txtStartRangeValidator.controltovalidate = "txtStart";
+txtStartRangeValidator.validationGroup = "myDateRangeValidator";
+txtStartRangeValidator.evaluationfunction = "RangeValidatorEvaluateIsValid";
+txtStartRangeValidator.maximumvalue = "";
+txtStartRangeValidator.minimumvalue = "";
+var rdbSearchRange_CustomValidator = document.all ? document.all["rdbSearchRange_CustomValidator"] : document.getElementById("rdbSearchRange_CustomValidator");
+rdbSearchRange_CustomValidator.errormessage = "Please enter Start Date";
+rdbSearchRange_CustomValidator.display = "Dynamic";
+rdbSearchRange_CustomValidator.validationGroup = "myrdbValidator";
+rdbSearchRange_CustomValidator.evaluationfunction = "CustomValidatorEvaluateIsValid";
+var txtEndDate_RequiredFieldValidator = document.all ? document.all["txtEndDate_RequiredFieldValidator"] : document.getElementById("txtEndDate_RequiredFieldValidator");
+txtEndDate_RequiredFieldValidator.controltovalidate = "txtEndDate";
+txtEndDate_RequiredFieldValidator.errormessage = "Please enter an End Date or select range.  ";
+txtEndDate_RequiredFieldValidator.display = "Dynamic";
+txtEndDate_RequiredFieldValidator.validationGroup = "myDateValidators";
+txtEndDate_RequiredFieldValidator.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+txtEndDate_RequiredFieldValidator.initialvalue = "";
+var txtEndDate_RegularExpressionValidator = document.all ? document.all["txtEndDate_RegularExpressionValidator"] : document.getElementById("txtEndDate_RegularExpressionValidator");
+txtEndDate_RegularExpressionValidator.controltovalidate = "txtEndDate";
+txtEndDate_RegularExpressionValidator.errormessage = "Please enter date in format MM/DD/YYYY";
+txtEndDate_RegularExpressionValidator.display = "Dynamic";
+txtEndDate_RegularExpressionValidator.validationGroup = "myDateValidators";
+txtEndDate_RegularExpressionValidator.evaluationfunction = "RegularExpressionValidatorEvaluateIsValid";
+txtEndDate_RegularExpressionValidator.validationexpression = "^(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\\d\\d$";
+var zipcodeCustom = document.all ? document.all["zipcodeCustom"] : document.getElementById("zipcodeCustom");
+zipcodeCustom.controltovalidate = "txtZipcode";
+zipcodeCustom.errormessage = "Provide at least one additional search criteria";
+zipcodeCustom.display = "Dynamic";
+zipcodeCustom.validationGroup = "myValidators";
+zipcodeCustom.evaluationfunction = "CustomValidatorEvaluateIsValid";
+var txtZipcode_RegularExpressionValidator = document.all ? document.all["txtZipcode_RegularExpressionValidator"] : document.getElementById("txtZipcode_RegularExpressionValidator");
+txtZipcode_RegularExpressionValidator.controltovalidate = "txtZipcode";
+txtZipcode_RegularExpressionValidator.errormessage = "Please enter a well formatted zipcode: ##### or #####-####";
+txtZipcode_RegularExpressionValidator.evaluationfunction = "RegularExpressionValidatorEvaluateIsValid";
+txtZipcode_RegularExpressionValidator.validationexpression = "^(7\\d{4}|7\\d{4}-\\d{4})$|^([a-zA-Z]\\d[a-zA-Z] \\d[a-zA-Z]\\d)$";
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+(function() {var fn = function() {$get("ToolkitScriptManager1_HiddenField").value = '';Sys.Application.remove_init(fn);};Sys.Application.add_init(fn);})();
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        Sys.Application.initialize();
+Sys.Application.add_init(function() {
+    $create(Sys.Extended.UI.CalendarBehavior, {"endDate":"Tue, 31 Oct 2017 00:00:00 GMT","format":"MM/dd/yyyy","id":"txtStart_CalendarExtender","startDate":"Sat, 01 Jan 2011 00:00:00 GMT","todaysDateFormat":"MM/dd/yyyy"}, null, null, $get("txtStart"));
+});
+
+document.getElementById('txtStartValidator').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('txtStartValidator'));
+}
+
+document.getElementById('txtStartRangeValidator').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('txtStartRangeValidator'));
+}
+
+document.getElementById('rdbSearchRange_CustomValidator').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('rdbSearchRange_CustomValidator'));
+}
+Sys.Application.add_init(function() {
+    $create(Sys.Extended.UI.CalendarBehavior, {"endDate":"Tue, 31 Oct 2017 00:00:00 GMT","format":"MM/dd/yyyy","id":"txtEndDate_CalendarExtender","startDate":"Sat, 01 Jan 2011 00:00:00 GMT","todaysDateFormat":"MM/dd/yyyy"}, null, null, $get("txtEndDate"));
+});
+
+document.getElementById('txtEndDate_RequiredFieldValidator').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('txtEndDate_RequiredFieldValidator'));
+}
+
+document.getElementById('txtEndDate_RegularExpressionValidator').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('txtEndDate_RegularExpressionValidator'));
+}
+
+document.getElementById('zipcodeCustom').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('zipcodeCustom'));
+}
+
+document.getElementById('txtZipcode_RegularExpressionValidator').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('txtZipcode_RegularExpressionValidator'));
+}
+Sys.Application.add_init(function() {
+    $create(Sys.Extended.UI.ComboBox, {"autoCompleteMode":2,"buttonControl":$get("cbxHOA_cbxHOA_Button"),"comboTableControl":$get("cbxHOA_cbxHOA_Table"),"dropDownStyle":0,"hiddenFieldControl":$get("cbxHOA_cbxHOA_HiddenField"),"optionListControl":$get("cbxHOA_cbxHOA_OptionList"),"selectedIndex":-1,"textBoxControl":$get("cbxHOA_cbxHOA_TextBox")}, null, null, $get("cbxHOA"));
+});
+//]]>
+</script>
+</form>
+
+</body>
+</html>
