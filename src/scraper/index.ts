@@ -1,4 +1,7 @@
-import { SAPDSessionState, Call } from '../Interfaces';
+import { SAPDFormParamConstants, SAPDFormPOSTHeaders } from '../constants';
+import { getDocument, postForm } from '../network';
+
+import { SAPDSessionState, Call, VariableSAPDFormParams, SAPDFormParams, PostFormParams } from '../Interfaces';
 
 export const collectSAPDSessionState = (page: Document): SAPDSessionState => {
     const viewStateInput = <HTMLInputElement>page.getElementById('__VIEWSTATE');
@@ -52,6 +55,55 @@ export const scrapeCallsFromPage = (page: Document): Call[] => {
     const calls = rawCalls.filter(isCall);
 
     return calls;
+}
+
+export const runScrapeJob = async (date: Date, councilDistrict: number): Promise<Call[]> => {
+    if (date < new Date('01/01/2011')) {
+        throw new Error('Cannot scrape dates before Jan. 1, 2011');
+    }
+
+    const dateString = date.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' });
+
+    // Generate the parameters for the SAPD form that are unique to this request
+
+    const variableParams: VariableSAPDFormParams = {
+        txtStart: dateString,
+        txtEndDate: dateString,
+        ddlCouncilDistrict: councilDistrict.toString()
+    };
+
+    try {
+        // Fetch the SAPD web form, taking the page and the cookies it sends
+        const { document: searchPage, cookieJar } = await getDocument('https://webapp3.sanantonio.gov/policecalls/Reports.aspx');
+
+        // Get the current session state from the web page
+        const sessionState = collectSAPDSessionState(searchPage);
+
+        // Bundle the variable params, session state and param constants together into an object we'll pass to the web app form
+        const formParams = Object.assign({}, SAPDFormParamConstants, variableParams, sessionState);
+
+        const postParams: PostFormParams = {
+            method: 'POST',
+            uri: 'https://webapp3.sanantonio.gov/policecalls/Reports.aspx',
+            form: formParams,
+            jar: cookieJar,
+            headers: SAPDFormPOSTHeaders
+        };
+
+        // Post to the form
+        await postForm(postParams);
+
+        // Get the results page, which should now contain the requested calls
+
+        const resultsPageResponse = await getDocument('https://webapp3.sanantonio.gov/policecalls/Results.aspx', cookieJar);
+
+        const { document: resultsPage } = resultsPageResponse;
+
+        return scrapeCallsFromPage(resultsPage);
+
+    } catch (e) {
+        throw new Error(e);
+    }
 }
 
 export const isCall = (object: object): boolean => {
