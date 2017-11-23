@@ -9,3 +9,11 @@ export const getAllDatesBetweenInclusive = (startDate: Date, endDate: Date): Dat
 
     return datesBetween;
 }
+
+export const getFirstOfPreviousMonth = (date: Date): Date => {
+    return new Date(date.getFullYear(), date.getMonth() - 1, 1)
+}
+
+export const getLastOfPreviousMonth = (date: Date): Date => {
+    return new Date(date.getFullYear(), date.getMonth(), 0)
+}
