@@ -1,6 +1,10 @@
 import { SAPDFormParamConstants, SAPDFormPOSTHeaders } from '../constants';
 import { getDocument, postForm } from '../network';
 
+import { IDatabase } from 'pg-promise';
+import { callColSet } from '../database/columnSets';
+import { upsertReplaceQuery } from '../database';
+import { getAllDatesBetweenInclusive } from '../util';
 import { SAPDSessionState, Call, VariableSAPDFormParams, SAPDFormParams, PostFormParams } from '../Interfaces';
 
 export const collectSAPDSessionState = (page: Document): SAPDSessionState => {
@@ -38,14 +42,14 @@ export const scrapeCallsFromPage = (page: Document): Call[] => {
         const tableData: string[] = Array.from(tr.getElementsByTagName('td')).map(td => { return td.textContent });
 
         const call: Call = {
-            incidentNumber: tableData[0],
+            incidentnumber: tableData[0],
             category: tableData[1],
-            problemType: tableData[2],
-            responseDate: new Date(tableData[3]),
+            problemtype: tableData[2],
+            responsedate: new Date(tableData[3]),
             address: tableData[4],
             hoa: tableData[5],
-            schoolDistrict: tableData[6],
-            councilDistrict: tableData[7].trim() !== '' ? parseInt(tableData[7]) : 99,
+            schooldistrict: tableData[6],
+            councildistrict: tableData[7].trim() !== '' ? parseInt(tableData[7]) : 99,
             zipcode: tableData[8].trim() !== '' ? parseInt(tableData[8]) : 0
         };
 
@@ -87,7 +91,8 @@ export const runScrapeJob = async (date: Date, councilDistrict: number): Promise
             uri: 'https://webapp3.sanantonio.gov/policecalls/Reports.aspx',
             form: formParams,
             jar: cookieJar,
-            headers: SAPDFormPOSTHeaders
+            headers: SAPDFormPOSTHeaders,
+            followAllRedirects: true
         };
 
         // Post to the form
@@ -106,17 +111,66 @@ export const runScrapeJob = async (date: Date, councilDistrict: number): Promise
     }
 }
 
-export const isCall = (object: object): boolean => {
-    const { incidentNumber, category, problemType, responseDate, address, hoa, schoolDistrict, councilDistrict, zipcode } = <Call>object;
+export const runScrapeQueue = async (startDate: Date, endDate: Date, councilDistricts: number[], db: IDatabase<any>): Promise<void> => {
+    const earlyThresholdDate = new Date('01/01/2011');
+    if (startDate < earlyThresholdDate || endDate < earlyThresholdDate) {
+        throw new Error('Cannot scrape dates before Jan. 1, 2011');
+    }
 
-    if (typeof incidentNumber !== 'string') return false;
+    if (councilDistricts.length === 0) {
+        throw new Error('You must pass an array of at least one council district (0-10, 0 being outside any district)');
+    }
+
+    // Generate an array of every date between the start and end date
+
+    const targetDates = getAllDatesBetweenInclusive(startDate, endDate);
+
+    // If there is more than one date in this array, we need to remove the last date (the end date).
+    // That's because for whatever reason, if you ask the SAPD form for a day's worth of data,
+    // it will give you that day and the next day.
+    // On a single-date scrape, there's not much we can do - just prune the data after you get it.
+    // On multi-day scrapes, removing the last day will give us the range of data we actually asked for.
+    // If anyone can figure out a way to ping the form and fix this problem, PRs are welcome.
+
+    if (targetDates.length > 1) {
+        targetDates.pop();
+    }
+
+    try {
+
+        // For each date:
+
+        for (let date of targetDates) {
+            for (let district of councilDistricts) {
+                // Get every call for the given date and district
+
+                const calls = await runScrapeJob(date, district);
+
+                // Generate an upsert query using all the calls
+
+                const upsertQuery = upsertReplaceQuery(calls, callColSet, 'incidentNumber');
+
+                // Run the query
+
+                await db.query(upsertQuery);
+            }
+        }
+    } catch (e) {
+        throw new Error(`Scrape failed: ${e}`);
+    }
+}
+
+export const isCall = (object: object): boolean => {
+    const { incidentnumber, category, problemtype, responsedate, address, hoa, schooldistrict, councildistrict, zipcode } = <Call>object;
+
+    if (typeof incidentnumber !== 'string') return false;
     if (typeof category !== 'string') return false;
-    if (typeof problemType !== 'string') return false;
-    if (Object.prototype.toString.call(responseDate) !== "[object Date]") return false;
+    if (typeof problemtype !== 'string') return false;
+    if (Object.prototype.toString.call(responsedate) !== "[object Date]") return false;
     if (typeof address !== 'string') return false;
     if (typeof hoa !== 'string') return false;
-    if (typeof schoolDistrict !== 'string') return false;
-    if (isNaN(councilDistrict)) return false;
+    if (typeof schooldistrict !== 'string') return false;
+    if (isNaN(councildistrict)) return false;
     if (isNaN(zipcode)) return false;
 
     return true;
