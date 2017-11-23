@@ -11,6 +11,7 @@ export interface PostFormParams {
     form: object;
     jar?: CookieJar;
     headers?: object;
+    followAllRedirects?: boolean;
 }
 
 export interface SAPDSessionState {
@@ -20,14 +21,14 @@ export interface SAPDSessionState {
 }
 
 export interface Call {
-    incidentNumber: string;
+    incidentnumber: string;
     category: string;
-    problemType: string;
-    responseDate: Date;
+    problemtype: string;
+    responsedate: Date;
     address: string;
     hoa: string;
-    schoolDistrict: string;
-    councilDistrict: number;
+    schooldistrict: string;
+    councildistrict: number;
     zipcode: number;
 }
 
