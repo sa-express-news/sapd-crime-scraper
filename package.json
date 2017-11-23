@@ -8,13 +8,9 @@
     "pretest": "tsc",
     "test": "TEST=TRUE NODE_ENV=test mocha ./build/**/**/spec.js",
     "pretest-full": "tsc",
-    "test-full": "NODE_ENV=test TEST_NETWORK=true mocha ./build/**/**/spec.js",
+    "test-full": "NODE_ENV=test NETWORK_TEST=TRUE mocha ./build/**/**/spec.js",
     "prestart": "tsc",
-    "start": "node build/index.js",
-    "premonthly": "tsc",
-    "monthly": "node build/index.js -- monthly",
-    "pre-scrape-full": "tsc",
-    "scrape-full": "node build/Processes/full.js"
+    "start": "node build/index.js"
   },
   "keywords": [
     "San",
