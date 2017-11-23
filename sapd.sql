@@ -67,14 +67,14 @@ ALTER SEQUENCE empty_id_seq OWNED BY empty.id;
 
 CREATE TABLE calls (
     id integer NOT NULL,
-    "incidentNumber" character varying(255),
+    incidentnumber character varying(255),
     category character varying(255),
-    "problemType" character varying(255),
-    "responseDate" timestamp with time zone,
+    problemtype character varying(255),
+    responsedate timestamp with time zone,
     address character varying(255),
     hoa character varying(255),
-    "schoolDistrict" character varying(255),
-    "councilDistrict" integer,
+    schooldistrict character varying(255),
+    councildistrict integer,
     zipcode integer
 );
 
@@ -138,7 +138,7 @@ ALTER TABLE ONLY empty
 --
 
 ALTER TABLE ONLY calls
-    ADD CONSTRAINT "calls_incidentNumber_key" UNIQUE ("incidentNumber");
+    ADD CONSTRAINT "calls_incidentnumber_key" UNIQUE ("incidentnumber");
 
 
 --
