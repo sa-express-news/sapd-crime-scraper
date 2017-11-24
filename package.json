@@ -23,28 +23,28 @@
   "author": "Kia Farhang",
   "license": "ISC",
   "devDependencies": {
-    "@types/chai": "^4.0.2",
-    "@types/chai-as-promised": "0.0.31",
-    "@types/mocha": "^2.2.41",
+    "@types/chai": "^4.0.5",
+    "@types/chai-as-promised": "7.1.0",
+    "@types/mocha": "^2.2.44",
     "@types/nock": "^8.2.1",
-    "@types/sinon": "^2.3.3",
-    "chai": "^4.1.1",
+    "@types/sinon": "^4.0.0",
+    "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
-    "mocha": "^3.5.0",
-    "nock": "^9.0.22",
-    "sinon": "^3.2.1"
+    "mocha": "^4.0.1",
+    "nock": "^9.1.0",
+    "sinon": "^4.1.2"
   },
   "dependencies": {
-    "@types/dotenv": "^4.0.0",
-    "@types/jsdom": "^11.0.1",
-    "@types/pg": "^6.1.43",
-    "@types/request-promise-native": "^1.0.6",
+    "@types/dotenv": "^4.0.2",
+    "@types/jsdom": "^11.0.4",
+    "@types/pg": "^7.4.0",
+    "@types/request-promise-native": "^1.0.10",
     "dotenv": "^4.0.0",
-    "fast-csv": "^2.4.0",
-    "jsdom": "^11.1.0",
-    "pg": "6.4.1",
+    "fast-csv": "^2.4.1",
+    "jsdom": "^11.4.0",
+    "pg": "7.4.0",
     "pg-hstore": "^2.3.2",
-    "pg-promise": "^7.0.0",
-    "request-promise-native": "^1.0.4"
+    "pg-promise": "^7.3.2",
+    "request-promise-native": "^1.0.5"
   }
 }
